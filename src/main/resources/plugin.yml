@@ -1,5 +1,5 @@
 name: Lobby
-version: 1.2
+version: 1.2-SNAPSHOT
 author: Rewex
 main: de.rewex.lobby
 commands:
