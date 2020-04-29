@@ -1,5 +1,7 @@
 package de.rewex.lobby;
 
+import de.rewex.lobby.commands.BuildCmd;
+import de.rewex.lobby.listeners.LobbyProtect;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -54,7 +56,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
     }
 
     private void registerCommands() {
-        //getCommand("build").setExecutor(new BuildCmd(this));
+        getCommand("build").setExecutor(new BuildCmd(this));
 
 
     }
@@ -62,7 +64,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
     private void registerListeners() {
         PluginManager pm = getServer().getPluginManager();
 
-        //pm.registerEvents(new ChatListeners(this), this);
+        pm.registerEvents(new LobbyProtect(this), this);
 
     }
 
