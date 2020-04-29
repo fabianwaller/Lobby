@@ -2,6 +2,7 @@ package de.rewex.lobby;
 
 import de.rewex.lobby.commands.BuildCmd;
 import de.rewex.lobby.listeners.LobbyProtect;
+import de.rewex.mysql.MySQL;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -36,12 +37,13 @@ public class Main extends JavaPlugin implements PluginMessageListener {
         registerCommands();
         registerListeners();
 
-        /*MySQL.connect();
+        MySQL.connect();
         MySQL.createTable();
         if (!MySQL.isConnected()) {
             Bukkit.shutdown();
         }
-
+        
+        /*
         RewardManager.registerTask();
         ScoreAPI.startUpdater();
 
