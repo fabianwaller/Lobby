@@ -13,12 +13,6 @@ import java.util.ArrayList;
 
 public class ChatListeners implements Listener {
 
-    private final Main plugin;
-
-    public ChatListeners(Main main) {
-        this.plugin = main;
-    }
-
     ArrayList<String> spam = new ArrayList<>();
 
     @EventHandler
@@ -35,7 +29,7 @@ public class ChatListeners implements Listener {
             }
             Bukkit.getConsoleSender().sendMessage(" " + p.getName() + " -> " + msg);
 
-            Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
                 public void run() {
                     spam.remove(p.getName());
                 }

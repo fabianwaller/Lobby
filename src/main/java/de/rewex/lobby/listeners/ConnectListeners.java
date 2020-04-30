@@ -16,12 +16,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class ConnectListeners implements Listener {
 
-    private final Main plugin;
-
-    public ConnectListeners(Main main) {
-        this.plugin = main;
-    }
-
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();

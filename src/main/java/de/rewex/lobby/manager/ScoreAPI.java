@@ -22,66 +22,71 @@ public class ScoreAPI {
             obj = sb.registerNewObjective("aaa", "bbb");
         }
 
-        obj.setDisplayName("  §9§lREWEX.DE  ");
+        obj.setDisplayName("  §9Rewex.de  ");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
+        //•●⬤
         obj.getScore("§1").setScore(12);
-        obj.getScore("§f§lRang").setScore(11);
-        obj.getScore("Rang").setScore(11);
-       // obj.getScore(updateTeam(sb, "Rang", "" + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
+        obj.getScore("§8•§7● Rang").setScore(11);
+        obj.getScore(updateTeam(sb, "Rang", "§8➜ " + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
         obj.getScore("§d").setScore(9);
-        obj.getScore("§f§lCoins").setScore(8);
-        obj.getScore(updateTeam(sb, "Coins", "§b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
+        obj.getScore("§8•§7● Coins").setScore(8);
+        obj.getScore(updateTeam(sb, "Coins", "§8➜ §b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
         obj.getScore("§3").setScore(6);
-        obj.getScore("§f§lTokens").setScore(5);
-        obj.getScore(updateTeam(sb, "Tokens", "§a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
+        obj.getScore("§8•§7● Tokens").setScore(5);
+        obj.getScore(updateTeam(sb, "Tokens", "§8➜ §a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
         obj.getScore("§4").setScore(3);
-        obj.getScore("§6§lGamepass").setScore(2);
+        obj.getScore("§8•§7● Gamepass").setScore(2);
         if(GamepassManager.hasPass(p.getUniqueId().toString())) {
-            obj.getScore(updateTeam(sb, "Gamepassa", "§aaktiviert", "", ChatColor.DARK_GREEN)).setScore(1);
+            obj.getScore(updateTeam(sb, "a", "§8➜ §aaktiviert", " §7/ §a✔", ChatColor.DARK_GREEN)).setScore(1);
         } else {
-            obj.getScore(updateTeam(sb, "Gamepasso", "§7deaktiviert", "", ChatColor.GRAY)).setScore(1);
+            obj.getScore(updateTeam(sb, "b", "§8➜ §cdeaktivi", "§cert §7/ §c✖", ChatColor.GRAY)).setScore(1);
         }
         obj.getScore("§5").setScore(0);
 
-        Team admin = getTeam(sb, "000Admin", "§c", "");
-        Team mod = getTeam(sb, "001Mod", "§b", "");
-        Team dev = getTeam(sb, "002Dev", "§d", "");
-        Team builder = getTeam(sb, "003Builder", "§a", "");
+        Team admin = getTeam(sb, "00Admin", "§4", "");
+        Team mod = getTeam(sb, "01Mod", "§9", "");
+        Team sup = getTeam(sb, "02Sup", "§b", "");
+        Team dev = getTeam(sb, "03Dev", "§d", "");
+        Team builder = getTeam(sb, "04Builder", "§a", "");
+        Team content = getTeam(sb, "05Content", "§3", "");
 
-        Team legende = getTeam(sb, "004Legende", "§4", "");
-        Team titan = getTeam(sb, "005Titan", "§b", "");
-        Team champion = getTeam(sb, "006Champion", "§d", "");
-        Team meister = getTeam(sb, "007Meister", "§a", "");
-        Team spieler = getTeam(sb, "008Spieler", "§7", "");
+        Team yootuber = getTeam(sb, "06Youtuber", "§5", "");
+        Team titan = getTeam(sb, "07Titan", "§e", "");
+        Team champ = getTeam(sb, "08Champ", "§c", "");
+        Team prime = getTeam(sb, "09Prime", "§6", "");
+        Team spieler = getTeam(sb, "10Spieler", "§7", "");
 
         for(Player all:Bukkit.getOnlinePlayers()) {
-            String team = "008Spieler";
-            if (all.hasPermission("server.admin")) {
-                team = "000Admin";
-            } else if (all.hasPermission("server.mod")) {
-                team = "001Mod";
-            } else if (all.hasPermission("server.dev")) {
-                team = "002Dev";
-            } else if (all.hasPermission("server.builder")) {
-                team = "003Builder";
-            } else {
-                if(RangManager.getRang(all).equalsIgnoreCase("Legende")) {
-                    team ="004Legende";
-                } else if(RangManager.getRang(all).equalsIgnoreCase("Titan")) {
-                    team = "005Titan";
-                } else if(RangManager.getRang(all).equalsIgnoreCase("Champion")) {
-                    team = "006Champion";
-                } else if(RangManager.getRang(all).equalsIgnoreCase("Meister")) {
-                    team = "007Meister";
-                }
+            String team = "010Spieler";
+            if (all.hasPermission("team.admin")) {
+                team = "00Admin";
+            } else if (all.hasPermission("team.mod")) {
+                team = "01Mod";
+            } else if (all.hasPermission("team.sup")) {
+                team = "02Sup";
+            } else if (all.hasPermission("team.dev")) {
+                team = "03Dev";
+            } else if (all.hasPermission("team.builder")) {
+                team = "04Builder";
+            } else if (all.hasPermission("team.content")) {
+                team = "05Content";
+            } else if (all.hasPermission("server.yt")) {
+                team = "06Youtuber";
+            } else if (all.hasPermission("server.titan")) {
+                team = "07Titan";
+            } else if (all.hasPermission("server.champ")) {
+                team = "08Champ";
+            } else if (all.hasPermission("server.prime")) {
+                team = "09Prime";
             }
 
             sb.getTeam(team).addPlayer(all);
 
-            all.setDisplayName(sb.getTeam(team).getPrefix() + all.getName());
+            //all.setDisplayName(sb.getTeam(team).getPrefix() + all.getName());
+            all.setDisplayName(all.getName());
 
-            all.setPlayerListName(RangManager.getRang(all) + sb.getTeam(team).getPrefix() + all.getName());
+            all.setPlayerListName(all.getName());
         }
 
         p.setScoreboard(sb);
@@ -97,50 +102,54 @@ public class ScoreAPI {
         Scoreboard sb = p.getScoreboard();
         Objective obj = sb.getObjective("aaa");
 
-        //obj.getScore(updateTeam(sb, "Rang", "" + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
-        obj.getScore(updateTeam(sb, "Coins", "§b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
-        obj.getScore(updateTeam(sb, "Tokens", "§a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
+        obj.getScore(updateTeam(sb, "Rang", "§8➜ " + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
+        obj.getScore(updateTeam(sb, "Coins", "§8➜ §b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
+        obj.getScore(updateTeam(sb, "Tokens", "§8➜ §a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
         if(GamepassManager.hasPass(p.getUniqueId().toString())) {
-            obj.getScore(updateTeam(sb, "Gamepassa", "§aaktiviert", "", ChatColor.DARK_GREEN)).setScore(1);
+            obj.getScore(updateTeam(sb, "a", "§8➜ §aaktiviert", " §7/ §a✔", ChatColor.DARK_GREEN)).setScore(1);
         } else {
-            obj.getScore(updateTeam(sb, "Gamepasso", "§7deaktiviert", "", ChatColor.GRAY)).setScore(1);
+            obj.getScore(updateTeam(sb, "b", "§8➜ §cdeaktivi", "ert §7/ §c✖", ChatColor.GRAY)).setScore(1);
         }
 
+        Team admin = getTeam(sb, "00Admin", "§4", "");
+        Team mod = getTeam(sb, "01Mod", "§9", "");
+        Team sup = getTeam(sb, "02Sup", "§b", "");
+        Team dev = getTeam(sb, "03Dev", "§d", "");
+        Team builder = getTeam(sb, "04Builder", "§a", "");
+        Team content = getTeam(sb, "05Content", "§3", "");
 
-        Team admin = getTeam(sb, "000Admin", "§c", "");
-        Team mod = getTeam(sb, "001Mod", "§b", "");
-        Team dev = getTeam(sb, "002Dev", "§d", "");
-        Team builder = getTeam(sb, "003Builder", "§a", "");
-
-        Team legende = getTeam(sb, "004Legende", "§9", "");
-        Team titan = getTeam(sb, "005Titan", "§e", "");
-        Team champion = getTeam(sb, "006Champion", "§c", "");
-        Team meister = getTeam(sb, "007Meister", "§5", "");
-        Team spieler = getTeam(sb, "008Spieler", "§7", "");
+        Team yootuber = getTeam(sb, "06Youtuber", "§5", "");
+        Team titan = getTeam(sb, "07Titan", "§e", "");
+        Team champ = getTeam(sb, "08Champ", "§c", "");
+        Team prime = getTeam(sb, "09Prime", "§6", "");
+        Team spieler = getTeam(sb, "10Spieler", "§7", "");
 
         for(Player all:Bukkit.getOnlinePlayers()) {
-            String team = "008Spieler";
-            if (all.hasPermission("server.admin")) {
-                team = "000Admin";
-            } else if (all.hasPermission("server.mod")) {
-                team = "001Mod";
-            } else if (all.hasPermission("server.dev")) {
-                team = "002Dev";
-            } else if (all.hasPermission("server.builder")) {
-                team = "003Builder";
-            } else {
-                if(RangManager.getRang(all).equalsIgnoreCase("Legende")) {
-                    team ="004Legende";
-                } else if(RangManager.getRang(all).equalsIgnoreCase("Titan")) {
-                    team = "005Titan";
-                } else if(RangManager.getRang(all).equalsIgnoreCase("Champion")) {
-                    team = "006Champion";
-                } else if(RangManager.getRang(all).equalsIgnoreCase("Meister")) {
-                    team = "007Meister";
-                }
+            String team = "010Spieler";
+            if (all.hasPermission("team.admin")) {
+                team = "00Admin";
+            } else if (all.hasPermission("team.mod")) {
+                team = "01Mod";
+            } else if (all.hasPermission("team.sup")) {
+                team = "02Sup";
+            } else if (all.hasPermission("team.dev")) {
+                team = "03Dev";
+            } else if (all.hasPermission("team.builder")) {
+                team = "04Builder";
+            } else if (all.hasPermission("team.content")) {
+                team = "05Content";
+            } else if (all.hasPermission("server.yt")) {
+                team = "06Youtuber";
+            } else if (all.hasPermission("server.titan")) {
+                team = "07Titan";
+            } else if (all.hasPermission("server.champ")) {
+                team = "08Champ";
+            } else if (all.hasPermission("server.prime")) {
+                team = "09Prime";
             }
 
             sb.getTeam(team).addPlayer(all);
+
         }
 
     }

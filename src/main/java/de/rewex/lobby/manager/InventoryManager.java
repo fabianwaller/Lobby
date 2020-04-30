@@ -31,16 +31,17 @@ public class InventoryManager {
         m.setOwner(p.getName());
         head.setItemMeta(m);
 
-        p.getInventory().setItem(0, new ItemBuilder(Material.COMPASS).setDisplayName(teleportername).build());
-        p.getInventory().setItem(1, new ItemBuilder(Material.FISHING_ROD).setDisplayName(enterhakenname).build());
+        p.getInventory().setItem(0, new ItemBuilder(Material.COMPASS).setName(teleportername).build());
+        p.getInventory().setItem(1, new ItemBuilder(Material.FISHING_ROD).setName(enterhakenname).setInfinityDurability().build());
 
-        p.getInventory().setItem(4, new ItemBuilder(Material.ENDER_CHEST).setDisplayName(shopname).setEnchantment(Enchantment.DAMAGE_ALL).setEnchantmentBool(false).build());
+        p.getInventory().setItem(4,
+                new ItemBuilder(Material.ENDER_CHEST).setName(shopname).addEnchant(Enchantment.DAMAGE_ALL,1 ).setFlags().build());
 
         if(p.hasPermission("server.nick")) {
-            p.getInventory().setItem(6, new ItemBuilder(Material.NAME_TAG).setDisplayName(nickname).build());
+            p.getInventory().setItem(6, new ItemBuilder(Material.NAME_TAG).setName(nickname).build());
         }
         p.getInventory().setItem(7, head);
-        p.getInventory().setItem(8, new ItemBuilder(Material.NETHER_STAR).setDisplayName(lobbyname).build());
+        p.getInventory().setItem(8, new ItemBuilder(Material.NETHER_STAR).setName(lobbyname).build());
 
     }
 

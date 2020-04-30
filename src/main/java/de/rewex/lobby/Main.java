@@ -1,11 +1,20 @@
 package de.rewex.lobby;
 
+import de.dytanic.cloudnet.driver.CloudNetDriver;
+import de.dytanic.cloudnet.driver.event.IEventManager;
+import de.rewex.cloud.CloudServer;
+import de.rewex.cloud.CloudServiceListeners;
+import de.rewex.cloud.lobbywechsler.LobbywechslerListeners;
+import de.rewex.cloud.teleporter.TeleporterListeners;
 import de.rewex.lobby.chat.ChatListeners;
 import de.rewex.lobby.commands.BuildCmd;
 import de.rewex.lobby.commands.SetlocCmd;
 import de.rewex.lobby.listeners.ConnectListeners;
 import de.rewex.lobby.listeners.LobbyProtect;
+import de.rewex.lobby.listeners.PlayerListeners;
+import de.rewex.lobby.manager.InventoryHandler;
 import de.rewex.lobby.manager.ScoreAPI;
+import de.rewex.lobby.manager.switchblocks.SwitchBlock;
 import de.rewex.mysql.MySQL;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -24,6 +33,8 @@ public class Main extends JavaPlugin implements PluginMessageListener {
     public static String noplayer = "[Lobby] Nur ein Spieler kann diesen Befehl ausführen";
 
     public static Main instance;
+    private CloudServer cloudServer;
+    private InventoryHandler inventoryHandler;
 
     public static Main getInstance() {
         return instance;
@@ -33,6 +44,9 @@ public class Main extends JavaPlugin implements PluginMessageListener {
     public void onEnable() {
         instance = this;
 
+        this.cloudServer = new CloudServer();
+        this.inventoryHandler = new InventoryHandler();
+
         getServer().getMessenger().registerOutgoingPluginChannel(Main.getInstance(), "BungeeCord");
         getServer().getMessenger().registerOutgoingPluginChannel(this, "LABYMOD");
         getServer().getMessenger().registerIncomingPluginChannel(this, "WDL|INIT", this);
@@ -40,6 +54,9 @@ public class Main extends JavaPlugin implements PluginMessageListener {
 
         registerCommands();
         registerListeners();
+
+        IEventManager eventManager = CloudNetDriver.getInstance().getEventManager();
+        eventManager.registerListener(new CloudServiceListeners(this));
 
         MySQL.connect();
         MySQL.createTable();
@@ -51,7 +68,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
         //RewardManager.registerTask();
         ScoreAPI.startUpdater();
 
-        //SwitchBlock.startAnimateTask();
+        SwitchBlock.startAnimateTask();
 
         Bukkit.getConsoleSender().sendMessage(Main.prefix + "§aPlugin aktiviert §7[§a" + getDescription().getVersion() + "]");
     }
@@ -69,15 +86,30 @@ public class Main extends JavaPlugin implements PluginMessageListener {
     }
 
     private void registerListeners() {
-        PluginManager pm = getServer().getPluginManager();
+        PluginManager pm = Bukkit.getPluginManager();
+
+        //de.rewex.cloud.lobbywechsler
+        pm.registerEvents(new LobbywechslerListeners(), this);
+        //.teleporter
+        pm.registerEvents(new TeleporterListeners(), this);
 
         //de.rewex.lobby.chat
-        pm.registerEvents(new ChatListeners(this), this);
+        pm.registerEvents(new ChatListeners(), this);
 
         //de.rewex.lobby.listeners
-        pm.registerEvents(new ConnectListeners(this), this);
-        pm.registerEvents(new LobbyProtect(this), this);
+        pm.registerEvents(new ConnectListeners(), this);
+        pm.registerEvents(new LobbyProtect(), this);
+        pm.registerEvents(new PlayerListeners(), this);
 
+
+    }
+
+    public InventoryHandler getInventoryHandler() {
+        return inventoryHandler;
+    }
+
+    public CloudServer getCloudServer() {
+        return cloudServer;
     }
 
     public void onPluginMessageReceived(String channel, Player p, byte[] data) {

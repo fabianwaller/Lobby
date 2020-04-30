@@ -16,12 +16,6 @@ import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class LobbyProtect implements Listener {
 
-    private final Main plugin;
-
-    public LobbyProtect(Main main) {
-        this.plugin = main;
-    }
-
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         if(!BuildCmd.build.contains(e.getPlayer().getName())) {
