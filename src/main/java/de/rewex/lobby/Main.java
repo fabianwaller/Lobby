@@ -2,6 +2,8 @@ package de.rewex.lobby;
 
 import de.rewex.lobby.chat.ChatListeners;
 import de.rewex.lobby.commands.BuildCmd;
+import de.rewex.lobby.commands.SetlocCmd;
+import de.rewex.lobby.listeners.ConnectListeners;
 import de.rewex.lobby.listeners.LobbyProtect;
 import de.rewex.lobby.manager.ScoreAPI;
 import de.rewex.mysql.MySQL;
@@ -61,6 +63,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
 
     private void registerCommands() {
         getCommand("build").setExecutor(new BuildCmd(this));
+        getCommand("setloc").setExecutor(new SetlocCmd(this));
 
 
     }
@@ -71,6 +74,8 @@ public class Main extends JavaPlugin implements PluginMessageListener {
         //de.rewex.lobby.chat
         pm.registerEvents(new ChatListeners(this), this);
 
+        //de.rewex.lobby.listeners
+        pm.registerEvents(new ConnectListeners(this), this);
         pm.registerEvents(new LobbyProtect(this), this);
 
     }

@@ -74,10 +74,10 @@ public class RangManager {
 
         } else if(p.hasPermission("server.prime")) {
             return "§6Prime";
-
-        } else {
-            return "§7Spieler";
         }
+
+        return "§7Spieler";
+
     }
 
 }

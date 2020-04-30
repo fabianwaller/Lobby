@@ -17,7 +17,7 @@ import com.google.common.collect.Lists;
 
 public class LocationManager {
 
-    private static File file = new File("root/cloud/local/templates/Lobby/default/plugins/locations.yml");
+    private static File file = new File("plugins/Lobby/locations.yml");
     private static FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
     public static void saveCfg() {

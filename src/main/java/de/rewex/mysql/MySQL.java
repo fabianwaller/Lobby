@@ -8,7 +8,7 @@ import java.sql.Statement;
 import org.bukkit.Bukkit;
 
 public class MySQL {
-    public static String prefix = "§7> §eMySQL §7| ";
+    public static String prefix = "§7» §eMySQL §7| ";
     public static String host = "localhost";
     public static String database = "Server";
     public static String user = "Fabian";
@@ -46,7 +46,7 @@ public class MySQL {
     }
 
     public static void createTable() {
-        if (isConnected()) {
+        /*if (isConnected()) {
             try {
                 // con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS REWARDS (UUID VARCHAR(64), LOGIN VARCHAR(64), DAILY int,
                 // PASSDAILY int)");
@@ -56,8 +56,9 @@ public class MySQL {
             catch (SQLException e) {
                 Bukkit.getConsoleSender().sendMessage(prefix + "§cERROR §7while creating §bRewards§7/§eInventar TABLES");
                 e.printStackTrace();
+                throw e;
             }
-        }
+        }*/
     }
 
     public static void update(String qry) {

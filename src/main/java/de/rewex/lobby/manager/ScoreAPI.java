@@ -1,5 +1,6 @@
 package de.rewex.lobby.manager;
 
+import de.rewex.lobby.Main;
 import de.rewex.mysql.players.gamepass.GamepassManager;
 import de.rewex.mysql.players.stats.PlayersAPI;
 import org.bukkit.Bukkit;
@@ -25,8 +26,9 @@ public class ScoreAPI {
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         obj.getScore("§1").setScore(12);
-        obj.getScore("§f§lLiga").setScore(11);
-        obj.getScore(updateTeam(sb, "Rang", "" + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
+        obj.getScore("§f§lRang").setScore(11);
+        obj.getScore("Rang").setScore(11);
+       // obj.getScore(updateTeam(sb, "Rang", "" + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
         obj.getScore("§d").setScore(9);
         obj.getScore("§f§lCoins").setScore(8);
         obj.getScore(updateTeam(sb, "Coins", "§b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
@@ -95,7 +97,7 @@ public class ScoreAPI {
         Scoreboard sb = p.getScoreboard();
         Objective obj = sb.getObjective("aaa");
 
-        obj.getScore(updateTeam(sb, "Rang", "" + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
+        //obj.getScore(updateTeam(sb, "Rang", "" + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
         obj.getScore(updateTeam(sb, "Coins", "§b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
         obj.getScore(updateTeam(sb, "Tokens", "§a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
         if(GamepassManager.hasPass(p.getUniqueId().toString())) {
@@ -169,7 +171,7 @@ public class ScoreAPI {
     private static int actionbarnumber;
 
     public static void startUpdater() {
-        /*actionbarnumber = 0;
+        actionbarnumber = 0;
         new BukkitRunnable() {
 
             @Override
@@ -178,9 +180,9 @@ public class ScoreAPI {
                     actionbarnumber = 0;
                 }
                 for(Player all:Bukkit.getOnlinePlayers()) {
-                    updateScoreboard(all);
+                   // updateScoreboard(all);
 
-                    if(actionbarnumber < 10) {
+                    /*if(actionbarnumber < 10) {
                         TitleAPI.sendActionBar(all, "§e+ §e§lBETAPHASE §7Release §f§lBUGREPORT §b§l/discord");
                     } else if(actionbarnumber < 20) {
                         TitleAPI.sendActionBar(all, "§b+ §9§lDiscord §7§lonline§7: §b§l/discord");
@@ -192,14 +194,14 @@ public class ScoreAPI {
                         TitleAPI.sendActionBar(all, "§c+ §b§lBUGFIXES §8§l+ §e§lVerbesserungen");
                     } else if(actionbarnumber < 60) {
                         TitleAPI.sendActionBar(all, "§e+ §6§lGAMEPASS §7Release: shop.rewex.de");
-                    }
+                    }*/
 
                 }
 
                 actionbarnumber++;
 
             }
-        }.runTaskTimer(Main.getInstance(), 20, 20);*/
+        }.runTaskTimer(Main.getInstance(), 20, 20);
     }
 
 }

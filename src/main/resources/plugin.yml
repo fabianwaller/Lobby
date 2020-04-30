@@ -4,3 +4,5 @@ author: Rewex
 main: de.rewex.lobby.Main
 commands:
   build: #server.build
+  setlocation: #lobby.setloc
+    aliases: [setloc]
