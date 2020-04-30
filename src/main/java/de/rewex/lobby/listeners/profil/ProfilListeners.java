@@ -3,6 +3,7 @@ package de.rewex.lobby.listeners.profil;
 import de.rewex.lobby.Main;
 import de.rewex.lobby.manager.InventoryHandler;
 import de.rewex.lobby.manager.ProfilHandler;
+import de.rewex.lobby.manager.RangManager;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,7 +20,7 @@ public class ProfilListeners implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         if ((e.getAction() == Action.RIGHT_CLICK_BLOCK) || (e.getAction() == Action.RIGHT_CLICK_AIR)) {
             if (e.getItem() != null) {
-                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(profilHandler.getProfilname())) {
+                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(RangManager.getColor(e.getPlayer()) + profilHandler.getProfilname())) {
                     e.getPlayer().openInventory(profilHandler.getProfil());
                     e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CLICK, 12.0F, 12.0F);
                     e.setCancelled(true);

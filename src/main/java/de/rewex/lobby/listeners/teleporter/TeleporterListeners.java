@@ -1,6 +1,7 @@
 package de.rewex.lobby.listeners.teleporter;
 
 import de.rewex.lobby.Main;
+import de.rewex.lobby.manager.LocationManager;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,6 +34,21 @@ public class TeleporterListeners implements Listener {
 
         if(e.getInventory().getName().equals(Main.getInstance().getInventoryHandler().getTeleportername())) {
             if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
+
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§aSpawn")) {
+                    LocationManager.telLocation(p, "spawn");
+                    p.closeInventory();
+                }
+
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§dFFA")) {
+                    LocationManager.telLocation(p, "ffa");
+                    p.closeInventory();
+                }
+
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§5Aura")) {
+                    LocationManager.telLocation(p, "aura");
+                    p.closeInventory();
+                }
 
 
                 p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
