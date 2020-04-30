@@ -1,7 +1,9 @@
 package de.rewex.lobby;
 
+import de.rewex.lobby.chat.ChatListeners;
 import de.rewex.lobby.commands.BuildCmd;
 import de.rewex.lobby.listeners.LobbyProtect;
+import de.rewex.lobby.manager.ScoreAPI;
 import de.rewex.mysql.MySQL;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -42,12 +44,12 @@ public class Main extends JavaPlugin implements PluginMessageListener {
         if (!MySQL.isConnected()) {
             Bukkit.shutdown();
         }
-        
-        /*
-        RewardManager.registerTask();
+
+
+        //RewardManager.registerTask();
         ScoreAPI.startUpdater();
 
-        SwitchBlock.startAnimateTask();*/
+        //SwitchBlock.startAnimateTask();
 
         Bukkit.getConsoleSender().sendMessage(Main.prefix + "§aPlugin aktiviert §7[§a" + getDescription().getVersion() + "]");
     }
@@ -65,6 +67,9 @@ public class Main extends JavaPlugin implements PluginMessageListener {
 
     private void registerListeners() {
         PluginManager pm = getServer().getPluginManager();
+
+        //de.rewex.lobby.chat
+        pm.registerEvents(new ChatListeners(this), this);
 
         pm.registerEvents(new LobbyProtect(this), this);
 
