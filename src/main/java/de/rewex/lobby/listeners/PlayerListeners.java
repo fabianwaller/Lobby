@@ -1,8 +1,6 @@
 package de.rewex.lobby.listeners;
 
-import de.rewex.lobby.Main;
 import de.rewex.lobby.commands.BuildCmd;
-import de.rewex.lobby.manager.InventoryManager;
 import de.rewex.lobby.manager.LocationManager;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

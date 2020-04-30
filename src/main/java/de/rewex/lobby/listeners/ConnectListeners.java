@@ -1,12 +1,9 @@
 package de.rewex.lobby.listeners;
 
 import de.rewex.lobby.Main;
-import de.rewex.lobby.manager.InventoryManager;
 import de.rewex.lobby.manager.LocationManager;
 import de.rewex.lobby.manager.ScoreAPI;
-import de.rewex.lobby.manager.utils.ItemBuilder;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,7 +25,7 @@ public class ConnectListeners implements Listener {
         p.setFoodLevel(20);
         p.setExp(0.0F);
         p.setLevel(0);
-        InventoryManager.setLobbyInv(p);
+        Main.getInstance().getInventoryHandler().setPlayerinv(p);
         LocationManager.telLocation(p, "spawn");
 
 

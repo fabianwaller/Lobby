@@ -4,8 +4,10 @@ import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.event.IEventManager;
 import de.rewex.cloud.CloudServer;
 import de.rewex.cloud.CloudServiceListeners;
-import de.rewex.cloud.lobbywechsler.LobbywechslerListeners;
-import de.rewex.cloud.teleporter.TeleporterListeners;
+import de.rewex.lobby.listeners.lobbywechsler.LobbywechslerListeners;
+import de.rewex.lobby.listeners.profil.ProfilListeners;
+import de.rewex.lobby.listeners.shop.ShopListeners;
+import de.rewex.lobby.listeners.teleporter.TeleporterListeners;
 import de.rewex.lobby.chat.ChatListeners;
 import de.rewex.lobby.commands.BuildCmd;
 import de.rewex.lobby.commands.SetlocCmd;
@@ -88,19 +90,18 @@ public class Main extends JavaPlugin implements PluginMessageListener {
     private void registerListeners() {
         PluginManager pm = Bukkit.getPluginManager();
 
-        //de.rewex.cloud.lobbywechsler
-        pm.registerEvents(new LobbywechslerListeners(), this);
-        //.teleporter
-        pm.registerEvents(new TeleporterListeners(), this);
-
         //de.rewex.lobby.chat
         pm.registerEvents(new ChatListeners(), this);
 
         //de.rewex.lobby.listeners
+        pm.registerEvents(new LobbywechslerListeners(), this);
+        pm.registerEvents(new ProfilListeners(), this);
+        pm.registerEvents(new ShopListeners(), this);
+        pm.registerEvents(new TeleporterListeners(), this);
+
         pm.registerEvents(new ConnectListeners(), this);
         pm.registerEvents(new LobbyProtect(), this);
         pm.registerEvents(new PlayerListeners(), this);
-
 
     }
 

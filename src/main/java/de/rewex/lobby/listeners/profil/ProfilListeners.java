@@ -1,8 +1,8 @@
-package de.rewex.cloud.teleporter;
+package de.rewex.lobby.listeners.profil;
 
-import de.dytanic.cloudnet.ext.bridge.BridgePlayerManager;
 import de.rewex.lobby.Main;
-import de.rewex.lobby.manager.InventoryManager;
+import de.rewex.lobby.manager.InventoryHandler;
+import de.rewex.lobby.manager.ProfilHandler;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,14 +11,16 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class TeleporterListeners implements Listener {
+public class ProfilListeners implements Listener {
+
+    private ProfilHandler profilHandler;
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         if ((e.getAction() == Action.RIGHT_CLICK_BLOCK) || (e.getAction() == Action.RIGHT_CLICK_AIR)) {
             if (e.getItem() != null) {
-                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(InventoryManager.teleportername)) {
-                    e.getPlayer().openInventory(Main.getInstance().getInventoryHandler().getTeleporterInventory());
+                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(profilHandler.getProfilname())) {
+                    e.getPlayer().openInventory(profilHandler.getProfil());
                     e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CLICK, 12.0F, 12.0F);
                     e.setCancelled(true);
                 }
@@ -33,7 +35,7 @@ public class TeleporterListeners implements Listener {
             p = (Player) e.getWhoClicked();
         }
 
-        if(e.getInventory().getName().equals(InventoryManager.teleportername)) {
+        if(e.getInventory().getName().equals(profilHandler.getProfilname())) {
             if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
 
 
