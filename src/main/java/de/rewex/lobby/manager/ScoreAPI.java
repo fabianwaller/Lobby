@@ -44,49 +44,48 @@ public class ScoreAPI {
         }
         obj.getScore("§5").setScore(0);
 
-        Team admin = getTeam(sb, "00Admin", "§4", "");
-        Team mod = getTeam(sb, "01Mod", "§9", "");
-        Team sup = getTeam(sb, "02Sup", "§b", "");
-        Team dev = getTeam(sb, "03Dev", "§d", "");
-        Team builder = getTeam(sb, "04Builder", "§a", "");
-        Team content = getTeam(sb, "05Content", "§3", "");
+        Team admin = getTeam(sb, "000Admin", "§4Admin §7| §4", "");
+        Team mod = getTeam(sb, "001Mod", "§9Mod §7| §9", "");
+        Team sup = getTeam(sb, "002Sup", "§bSup §7| §b", "");
+        Team dev = getTeam(sb, "003Dev", "§dMod §7| §d", "");
+        Team builder = getTeam(sb, "004Builder", "§aBuilder §7| §a", "");
+        Team content = getTeam(sb, "005Content", "§3Content §7| §3", "");
 
-        Team yootuber = getTeam(sb, "06Youtuber", "§5", "");
-        Team titan = getTeam(sb, "07Titan", "§e", "");
-        Team champ = getTeam(sb, "08Champ", "§c", "");
-        Team prime = getTeam(sb, "09Prime", "§6", "");
-        Team spieler = getTeam(sb, "10Spieler", "§7", "");
+        Team yootuber = getTeam(sb, "006Youtuber", "§5", "");
+        Team titan = getTeam(sb, "007Titan", "§e", "");
+        Team champ = getTeam(sb, "008Champ", "§c", "");
+        Team prime = getTeam(sb, "009Prime", "§6", "");
+        Team spieler = getTeam(sb, "010Spieler", "§7", "");
 
         for(Player all:Bukkit.getOnlinePlayers()) {
             String team = "010Spieler";
             if (all.hasPermission("team.admin")) {
-                team = "00Admin";
+                team = "000Admin";
             } else if (all.hasPermission("team.mod")) {
-                team = "01Mod";
+                team = "001Mod";
             } else if (all.hasPermission("team.sup")) {
-                team = "02Sup";
+                team = "002Sup";
             } else if (all.hasPermission("team.dev")) {
-                team = "03Dev";
+                team = "003Dev";
             } else if (all.hasPermission("team.builder")) {
-                team = "04Builder";
+                team = "004Builder";
             } else if (all.hasPermission("team.content")) {
-                team = "05Content";
+                team = "005Content";
             } else if (all.hasPermission("server.yt")) {
-                team = "06Youtuber";
+                team = "006Youtuber";
             } else if (all.hasPermission("server.titan")) {
-                team = "07Titan";
+                team = "007Titan";
             } else if (all.hasPermission("server.champ")) {
-                team = "08Champ";
+                team = "008Champ";
             } else if (all.hasPermission("server.prime")) {
-                team = "09Prime";
+                team = "009Prime";
             }
 
             sb.getTeam(team).addPlayer(all);
 
-            //all.setDisplayName(sb.getTeam(team).getPrefix() + all.getName());
-            all.setDisplayName(all.getName());
+            all.setDisplayName(sb.getTeam(team).getPrefix() + all.getName());
 
-            all.setPlayerListName(all.getName());
+            all.setPlayerListName(sb.getTeam(team).getPrefix() + all.getName());
         }
 
         p.setScoreboard(sb);
@@ -111,41 +110,41 @@ public class ScoreAPI {
             obj.getScore(updateTeam(sb, "b", "§8➜ §cdeaktivi", "ert §7/ §c✖", ChatColor.GRAY)).setScore(1);
         }
 
-        Team admin = getTeam(sb, "00Admin", "§4", "");
-        Team mod = getTeam(sb, "01Mod", "§9", "");
-        Team sup = getTeam(sb, "02Sup", "§b", "");
-        Team dev = getTeam(sb, "03Dev", "§d", "");
-        Team builder = getTeam(sb, "04Builder", "§a", "");
-        Team content = getTeam(sb, "05Content", "§3", "");
+        Team admin = getTeam(sb, "000Admin", "§4Admin §7| §4", "");
+        Team mod = getTeam(sb, "001Mod", "§9Mod §7| §9", "");
+        Team sup = getTeam(sb, "002Sup", "§bSup §7| §b", "");
+        Team dev = getTeam(sb, "003Dev", "§dMod §7| §d", "");
+        Team builder = getTeam(sb, "004Builder", "§aBuilder §7| §a", "");
+        Team content = getTeam(sb, "005Content", "§3Content §7| §3", "");
 
-        Team yootuber = getTeam(sb, "06Youtuber", "§5", "");
-        Team titan = getTeam(sb, "07Titan", "§e", "");
-        Team champ = getTeam(sb, "08Champ", "§c", "");
-        Team prime = getTeam(sb, "09Prime", "§6", "");
-        Team spieler = getTeam(sb, "10Spieler", "§7", "");
+        Team yootuber = getTeam(sb, "006Youtuber", "§5", "");
+        Team titan = getTeam(sb, "007Titan", "§e", "");
+        Team champ = getTeam(sb, "008Champ", "§c", "");
+        Team prime = getTeam(sb, "009Prime", "§6", "");
+        Team spieler = getTeam(sb, "010Spieler", "§7", "");
 
         for(Player all:Bukkit.getOnlinePlayers()) {
             String team = "010Spieler";
             if (all.hasPermission("team.admin")) {
-                team = "00Admin";
+                team = "000Admin";
             } else if (all.hasPermission("team.mod")) {
-                team = "01Mod";
+                team = "001Mod";
             } else if (all.hasPermission("team.sup")) {
-                team = "02Sup";
+                team = "002Sup";
             } else if (all.hasPermission("team.dev")) {
-                team = "03Dev";
+                team = "003Dev";
             } else if (all.hasPermission("team.builder")) {
-                team = "04Builder";
+                team = "004Builder";
             } else if (all.hasPermission("team.content")) {
-                team = "05Content";
+                team = "005Content";
             } else if (all.hasPermission("server.yt")) {
-                team = "06Youtuber";
+                team = "006Youtuber";
             } else if (all.hasPermission("server.titan")) {
-                team = "07Titan";
+                team = "007Titan";
             } else if (all.hasPermission("server.champ")) {
-                team = "08Champ";
+                team = "008Champ";
             } else if (all.hasPermission("server.prime")) {
-                team = "09Prime";
+                team = "009Prime";
             }
 
             sb.getTeam(team).addPlayer(all);

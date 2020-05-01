@@ -19,6 +19,7 @@ public class InventoryHandler {
     private Inventory lobby;
 
     public String teleportername = "§7Teleporter";
+    public String versteckenname = "§aSpieler verstecken";
     private String enterhakenname = "§7Enterhaken";
     private String shopname = "§6Shop";
     private String nickname = "§5Autonick";
@@ -70,8 +71,9 @@ public class InventoryHandler {
         m.setOwner(p.getName());
         head.setItemMeta(m);
 
-        p.getInventory().setItem(0, new ItemBuilder(Material.COMPASS).setName(teleportername).build());
-        p.getInventory().setItem(1, new ItemBuilder(Material.FISHING_ROD).setName(enterhakenname).setInfinityDurability().build());
+        p.getInventory().setItem(0, new ItemBuilder(Material.RECORD_11).setName(teleportername).build());
+        p.getInventory().setItem(1, new ItemBuilder(Material.INK_SACK,1 ,(short)10).setName(versteckenname).build());
+        p.getInventory().setItem(2, new ItemBuilder(Material.FISHING_ROD).setName(enterhakenname).setInfinityDurability().build());
 
         p.getInventory().setItem(4,
                 new ItemBuilder(Material.ENDER_CHEST).setName(shopname).addEnchant(Enchantment.DAMAGE_ALL,1 ).setFlags().build());

@@ -4,6 +4,7 @@ import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.event.IEventManager;
 import de.rewex.cloud.CloudServer;
 import de.rewex.cloud.CloudServiceListeners;
+import de.rewex.lobby.listeners.gadgets.Enterhaken;
 import de.rewex.lobby.listeners.lobbywechsler.LobbywechslerListeners;
 import de.rewex.lobby.listeners.profil.ProfilListeners;
 import de.rewex.lobby.listeners.shop.ShopListeners;
@@ -94,6 +95,9 @@ public class Main extends JavaPlugin implements PluginMessageListener {
         pm.registerEvents(new ChatListeners(), this);
 
         //de.rewex.lobby.listeners
+        //Gadgets
+        pm.registerEvents(new Enterhaken(), this);
+
         pm.registerEvents(new LobbywechslerListeners(), this);
         pm.registerEvents(new ProfilListeners(), this);
         pm.registerEvents(new ShopListeners(), this);

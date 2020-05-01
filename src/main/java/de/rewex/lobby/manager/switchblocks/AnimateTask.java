@@ -13,16 +13,16 @@ public class AnimateTask implements Runnable {
     @Override
     public void run() {
         counter++;
-
-        color = (int) (Math.random() * 15 + 1);
+        color++;
+       // color = (int) (Math.random() * 15 + 1);
 
         if(counter > 7) {
             counter = 0;
         }
 
-		/*if(color >= 15) {
-			color = 0;
-		}*/
+		if(color >= 15) {
+			color = 1;
+		}
 
         SwitchBlock.getSwitchblocks().forEach(switchBlock -> {
             if(switchBlock.getLocs().get(counter).getBlock().getData() == color) {

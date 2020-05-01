@@ -55,7 +55,7 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder setUnbrak(){
+    public ItemBuilder setUnbreakable(){
         ItemMeta im = is.getItemMeta();
         im.spigot().setUnbreakable(true);
         is.setItemMeta(im);
