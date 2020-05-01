@@ -3,6 +3,7 @@ package de.rewex.lobby.listeners;
 import de.rewex.lobby.Main;
 import de.rewex.lobby.manager.LocationManager;
 import de.rewex.lobby.manager.ScoreAPI;
+import de.rewex.mysql.players.settings.LobbySettings;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,7 +30,6 @@ public class ConnectListeners implements Listener {
         LocationManager.telLocation(p, "spawn");
 
 
-
         /*RewardManager.createPlayer(p.getUniqueId().toString());
         if(RewardManager.getAllowDailyCoinsReward(p.getUniqueId().toString())) {
             RewardManager.setReward(p);
@@ -37,6 +37,7 @@ public class ConnectListeners implements Listener {
             p.sendMessage(Main.coinspr + "§7Tägliche Belohnung verfügbar in " + RewardManager.getRemainingTime(p.getUniqueId().toString()));
         }*/
         //InventarManager.createPlayer(p.getUniqueId().toString());
+        LobbySettings.createPlayer(p.getUniqueId().toString());
 
 		/*TitleAPI.sendTabTitle(p, "\n   §9§lRewex.de §8× §7Dein Minigames Netzwerk   "
 				+ "\n§7Derzeitiger Server §8× §aLobby #1"

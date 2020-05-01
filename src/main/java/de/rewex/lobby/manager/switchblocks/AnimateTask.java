@@ -13,15 +13,16 @@ public class AnimateTask implements Runnable {
     @Override
     public void run() {
         counter++;
-        color++;
+        //color++;
        // color = (int) (Math.random() * 15 + 1);
 
         if(counter > 7) {
             counter = 0;
+            color++;
         }
 
 		if(color >= 15) {
-			color = 1;
+			color = 0;
 		}
 
         SwitchBlock.getSwitchblocks().forEach(switchBlock -> {
@@ -31,7 +32,7 @@ public class AnimateTask implements Runnable {
             switchBlock.getLocs().get(counter).getBlock().setData((byte) color);
 
             for(Player all : Bukkit.getOnlinePlayers()) {
-                all.spigot().playEffect(switchBlock.getCenter(), Effect.SMOKE, 1, 0, 0, 0, 0, 5, 20, 20);
+                all.spigot().playEffect(switchBlock.getCenter(), Effect.COLOURED_DUST, 1, 0, 0, 0, 0, 1, 50, 20);
             }
         });
 

@@ -33,7 +33,7 @@ public class LobbywechslerListeners implements Listener {
             p = (Player) e.getWhoClicked();
         }
 
-        if(e.getInventory().getName().equals("§aLobby Wechsler")) {
+        if(e.getInventory().getName().equals(Main.getInstance().getInventoryHandler().getLobbyname())) {
             if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
                 BridgePlayerManager.getInstance().proxySendPlayer(p.getUniqueId(),
                         e.getCurrentItem().getItemMeta().getDisplayName());

@@ -2,6 +2,7 @@ package de.rewex.lobby.listeners;
 
 import de.rewex.lobby.commands.BuildCmd;
 import de.rewex.lobby.manager.LocationManager;
+import de.rewex.mysql.players.settings.LobbySettings;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,7 +40,10 @@ public class PlayerListeners implements Listener {
 
     @EventHandler
     public void onHotbarswitch(PlayerItemHeldEvent e) {
-        e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.NOTE_STICKS, 2.0F, 1.0F);
+        if(LobbySettings.getHotbarSounds(e.getPlayer().getUniqueId().toString()) == true) {
+            e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.NOTE_STICKS, 2.0F, 1.0F);
+        }
+
     }
 
     @EventHandler

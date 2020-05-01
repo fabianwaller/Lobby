@@ -5,6 +5,8 @@ import de.rewex.lobby.manager.InventoryHandler;
 import de.rewex.lobby.manager.LocationManager;
 import de.rewex.lobby.manager.ProfilHandler;
 import de.rewex.lobby.manager.RangManager;
+import de.rewex.mysql.players.settings.LobbySettings;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -101,8 +103,60 @@ public class ProfilListeners implements Listener {
 
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cZurück")) {
                     p.openInventory(profilHandler.getProfil());
+                    p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                    return;
                 }
-                p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+
+                String action = e.getCurrentItem().getItemMeta().getDisplayName();
+                if(action.equalsIgnoreCase("§aJeden Anzeigen")) {
+                    LobbySettings.setSichtbarkeit(p.getUniqueId().toString(), 2);
+                    p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                } else if(action.equalsIgnoreCase("§5Teammitlgieder Anzeigen")) {
+                    LobbySettings.setSichtbarkeit(p.getUniqueId().toString(), 1);
+                    p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                } else if(action.equalsIgnoreCase("§cNiemanden Anzeigen")) {
+                    LobbySettings.setSichtbarkeit(p.getUniqueId().toString(), 0);
+                    p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                }
+
+                int line = profilHandler.getLine(e.getRawSlot());
+                int object = line*9;
+                if(profilHandler.getEinstellungen().getItem(object).getItemMeta().getDisplayName().equalsIgnoreCase("§bAnimationen")) {
+                    if(action == "§aAktivieren") {
+                        LobbySettings.setAnimationen(p.getUniqueId().toString(), true);
+                        p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                    } else if(action == "§cDeaktivieren") {
+                        LobbySettings.setAnimationen(p.getUniqueId().toString(), false);
+                        p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                    }
+                } else if(profilHandler.getEinstellungen().getItem(object).getItemMeta().getDisplayName().equalsIgnoreCase("§cHotbar Sounds")) {
+                    if(action == "§aAktivieren") {
+                        LobbySettings.setHotbarsounds(p.getUniqueId().toString(), true);
+                        p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                    } else if(action == "§cDeaktivieren") {
+                        LobbySettings.setHotbarsounds(p.getUniqueId().toString(), false);
+                        p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                    }
+                } else if(profilHandler.getEinstellungen().getItem(object).getItemMeta().getDisplayName().equalsIgnoreCase("§eScoreboard")) {
+                    if(action == "§aAktivieren") {
+                        LobbySettings.setScoreboard(p.getUniqueId().toString(), true);
+                        p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                    } else if(action == "§cDeaktivieren") {
+                        LobbySettings.setScoreboard(p.getUniqueId().toString(), false);
+                        p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                    }
+                }  else if(profilHandler.getEinstellungen().getItem(object).getItemMeta().getDisplayName().equalsIgnoreCase("§aLobby Echtzeit")) {
+                    if(action == "§aAktivieren") {
+                        LobbySettings.setEchtzeit(p.getUniqueId().toString(), true);
+                        p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                    } else if(action == "§cDeaktivieren") {
+                        LobbySettings.setEchtzeit(p.getUniqueId().toString(), false);
+                        p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
+                    }
+                }
+
+                profilHandler.updateEinstellungen(p, profilHandler.getEinstellungen());
+                p.updateInventory();
             }
             e.setCancelled(true);
         }

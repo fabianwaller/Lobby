@@ -2,6 +2,7 @@ package de.rewex.lobby.manager;
 
 import de.rewex.lobby.Main;
 import de.rewex.mysql.players.gamepass.GamepassManager;
+import de.rewex.mysql.players.settings.LobbySettings;
 import de.rewex.mysql.players.stats.PlayersAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,27 +23,30 @@ public class ScoreAPI {
             obj = sb.registerNewObjective("aaa", "bbb");
         }
 
-        obj.setDisplayName("  §9Rewex.de  ");
-        obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+        if(LobbySettings.getScoreboard(p.getUniqueId().toString()) == true) {
+            obj.setDisplayName("  §9Rewex.de  ");
+            obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-        //•●⬤
-        obj.getScore("§1").setScore(12);
-        obj.getScore("§8•§7● Rang").setScore(11);
-        obj.getScore(updateTeam(sb, "Rang", "§8➜ " + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
-        obj.getScore("§d").setScore(9);
-        obj.getScore("§8•§7● Coins").setScore(8);
-        obj.getScore(updateTeam(sb, "Coins", "§8➜ §b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
-        obj.getScore("§3").setScore(6);
-        obj.getScore("§8•§7● Tokens").setScore(5);
-        obj.getScore(updateTeam(sb, "Tokens", "§8➜ §a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
-        obj.getScore("§4").setScore(3);
-        obj.getScore("§8•§7● Gamepass").setScore(2);
-        if(GamepassManager.hasPass(p.getUniqueId().toString())) {
-            obj.getScore(updateTeam(sb, "a", "§8➜ §aaktiviert", " §7/ §a✔", ChatColor.DARK_GREEN)).setScore(1);
-        } else {
-            obj.getScore(updateTeam(sb, "b", "§8➜ §cdeaktivi", "§cert §7/ §c✖", ChatColor.GRAY)).setScore(1);
+            //•●⬤
+            obj.getScore("§1").setScore(12);
+            obj.getScore("§8•§7● Rang").setScore(11);
+            obj.getScore(updateTeam(sb, "Rang", "§8➜ " + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
+            obj.getScore("§d").setScore(9);
+            obj.getScore("§8•§7● Coins").setScore(8);
+            obj.getScore(updateTeam(sb, "Coins", "§8➜ §b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
+            obj.getScore("§3").setScore(6);
+            obj.getScore("§8•§7● Tokens").setScore(5);
+            obj.getScore(updateTeam(sb, "Tokens", "§8➜ §a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
+            obj.getScore("§4").setScore(3);
+            obj.getScore("§8•§7● Gamepass").setScore(2);
+            if(GamepassManager.hasPass(p.getUniqueId().toString())) {
+                obj.getScore(updateTeam(sb, "a", "§8➜ §aaktiviert", " §7/ §a✔", ChatColor.DARK_GREEN)).setScore(1);
+            } else {
+                obj.getScore(updateTeam(sb, "b", "§8➜ §cdeaktivi", "§cert §7/ §c✖", ChatColor.GRAY)).setScore(1);
+            }
+            obj.getScore("§5").setScore(0);
         }
-        obj.getScore("§5").setScore(0);
+
 
         Team admin = getTeam(sb, "000Admin", "§4Admin §7| §4", "");
         Team mod = getTeam(sb, "001Mod", "§9Mod §7| §9", "");
@@ -101,13 +105,15 @@ public class ScoreAPI {
         Scoreboard sb = p.getScoreboard();
         Objective obj = sb.getObjective("aaa");
 
-        obj.getScore(updateTeam(sb, "Rang", "§8➜ " + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
-        obj.getScore(updateTeam(sb, "Coins", "§8➜ §b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
-        obj.getScore(updateTeam(sb, "Tokens", "§8➜ §a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
-        if(GamepassManager.hasPass(p.getUniqueId().toString())) {
-            obj.getScore(updateTeam(sb, "a", "§8➜ §aaktiviert", " §7/ §a✔", ChatColor.DARK_GREEN)).setScore(1);
-        } else {
-            obj.getScore(updateTeam(sb, "b", "§8➜ §cdeaktivi", "ert §7/ §c✖", ChatColor.GRAY)).setScore(1);
+        if(LobbySettings.getScoreboard(p.getUniqueId().toString()) == true) {
+            obj.getScore(updateTeam(sb, "Rang", "§8➜ " + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
+            obj.getScore(updateTeam(sb, "Coins", "§8➜ §b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
+            obj.getScore(updateTeam(sb, "Tokens", "§8➜ §a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
+            if(GamepassManager.hasPass(p.getUniqueId().toString())) {
+                obj.getScore(updateTeam(sb, "a", "§8➜ §aaktiviert", " §7/ §a✔", ChatColor.DARK_GREEN)).setScore(1);
+            } else {
+                obj.getScore(updateTeam(sb, "b", "§8➜ §cdeaktivi", "ert §7/ §c✖", ChatColor.GRAY)).setScore(1);
+            }
         }
 
         Team admin = getTeam(sb, "000Admin", "§4Admin §7| §4", "");

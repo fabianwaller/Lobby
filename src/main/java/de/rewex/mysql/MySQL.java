@@ -46,19 +46,17 @@ public class MySQL {
     }
 
     public static void createTable() {
-        /*if (isConnected()) {
+        if (isConnected()) {
             try {
-                // con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS REWARDS (UUID VARCHAR(64), LOGIN VARCHAR(64), DAILY int,
-                // PASSDAILY int)");
-                // con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS Inventar (UUID VARCHAR(64), Fortbewegung int)");
-                //Bukkit.getConsoleSender().sendMessage(prefix + "§bREWARDS TABLE §acreated");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS LOBBYSETTINGS (UUID VARCHAR(64), Sichtbarkeit int, " +
+                        "Animationen int, Hotbarsounds int, Scoreboard int, Echtzeit int)");
+                Bukkit.getConsoleSender().sendMessage(prefix + "§aLOBBYSETTINGS §7TABLE §acreated");
             }
             catch (SQLException e) {
-                Bukkit.getConsoleSender().sendMessage(prefix + "§cERROR §7while creating §bRewards§7/§eInventar TABLES");
+                Bukkit.getConsoleSender().sendMessage(prefix + "§cERROR §7while creating §aLOBBYSETTINGS §7TABLE");
                 e.printStackTrace();
-                throw e;
             }
-        }*/
+        }
     }
 
     public static void update(String qry) {

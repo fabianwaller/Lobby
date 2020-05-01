@@ -6,3 +6,4 @@ commands:
   build: #server.build
   setlocation: #lobby.setloc
     aliases: [setloc]
+  stats:
