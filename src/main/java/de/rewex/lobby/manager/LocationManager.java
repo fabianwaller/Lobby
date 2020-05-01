@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.util.List;
 
 import de.rewex.lobby.Main;
+import de.rewex.mysql.players.settings.LobbySettings;
+import net.minecraft.server.v1_8_R3.EnumParticle;
+import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
+import net.minecraft.server.v1_8_R3.PlayerConnection;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -12,8 +16,12 @@ import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import com.google.common.collect.Lists;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 public class LocationManager {
 
@@ -84,14 +92,37 @@ public class LocationManager {
     }
 
 
-    public static void telLocation(Player p, String name) {
+    public static void telLocation(Player p, String name, boolean animated) {
         Location loc = getLocation(name);
         if(loc == null) {
             Bukkit.getConsoleSender().sendMessage(Main.prefix + "§cDie Location §e" + name + " §cexistiert noch nicht§8!");
             return;
         }
-        p.teleport(loc);
-        p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 3.0F, 2.0F);
+
+        if(animated==true && LobbySettings.getAnimationen(p.getUniqueId().toString()) == true) {
+            PlayerConnection connection = ((CraftPlayer)p).getHandle().playerConnection;
+            PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.MOB_APPEARANCE, false, 1, 20, 1, 1, 1, 1, 0, 1);
+            connection.sendPacket(packet);
+            p.playSound(p.getLocation(), Sound.FIREWORK_BLAST, 3.0F, 2.0F);
+
+            p.setVelocity(p.getVelocity().setY(3.0D));
+            p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,5,2));
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    p.playSound(p.getLocation(), Sound.ANVIL_LAND, 3.0F, 2.0F);
+                    p.teleport(loc);
+                }
+            }, 40L);
+
+        } else {
+            p.teleport(loc);
+            p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 3.0F, 2.0F);
+        }
+
+
+
     }
 
     ////////////////

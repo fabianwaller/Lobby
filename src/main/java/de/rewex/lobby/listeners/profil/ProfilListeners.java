@@ -1,10 +1,8 @@
 package de.rewex.lobby.listeners.profil;
 
 import de.rewex.lobby.Main;
-import de.rewex.lobby.manager.InventoryHandler;
-import de.rewex.lobby.manager.LocationManager;
-import de.rewex.lobby.manager.ProfilHandler;
-import de.rewex.lobby.manager.RangManager;
+import de.rewex.lobby.listeners.ConnectListeners;
+import de.rewex.lobby.manager.*;
 import de.rewex.mysql.players.settings.LobbySettings;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -110,12 +108,18 @@ public class ProfilListeners implements Listener {
                 String action = e.getCurrentItem().getItemMeta().getDisplayName();
                 if(action.equalsIgnoreCase("§aJeden Anzeigen")) {
                     LobbySettings.setSichtbarkeit(p.getUniqueId().toString(), 2);
+                    Sichtbarkeit sichtbarkeit = new Sichtbarkeit(p);
+                    sichtbarkeit.update();
                     p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
-                } else if(action.equalsIgnoreCase("§5Teammitlgieder Anzeigen")) {
+                } else if(action.equalsIgnoreCase("§5Teammitglieder Anzeigen")) {
                     LobbySettings.setSichtbarkeit(p.getUniqueId().toString(), 1);
+                    Sichtbarkeit sichtbarkeit = new Sichtbarkeit(p);
+                    sichtbarkeit.update();
                     p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
                 } else if(action.equalsIgnoreCase("§cNiemanden Anzeigen")) {
                     LobbySettings.setSichtbarkeit(p.getUniqueId().toString(), 0);
+                    Sichtbarkeit sichtbarkeit = new Sichtbarkeit(p);
+                    sichtbarkeit.update();
                     p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
                 }
 

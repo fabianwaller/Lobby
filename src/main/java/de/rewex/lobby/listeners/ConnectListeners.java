@@ -3,6 +3,7 @@ package de.rewex.lobby.listeners;
 import de.rewex.lobby.Main;
 import de.rewex.lobby.manager.LocationManager;
 import de.rewex.lobby.manager.ScoreAPI;
+import de.rewex.lobby.manager.Sichtbarkeit;
 import de.rewex.mysql.players.settings.LobbySettings;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -27,7 +28,7 @@ public class ConnectListeners implements Listener {
         p.setExp(0.0F);
         p.setLevel(0);
         Main.getInstance().getInventoryHandler().setPlayerinv(p);
-        LocationManager.telLocation(p, "spawn");
+        LocationManager.telLocation(p, "spawn", false);
 
 
         /*RewardManager.createPlayer(p.getUniqueId().toString());
@@ -38,6 +39,8 @@ public class ConnectListeners implements Listener {
         }*/
         //InventarManager.createPlayer(p.getUniqueId().toString());
         LobbySettings.createPlayer(p.getUniqueId().toString());
+        Sichtbarkeit sichtbarkeit = new Sichtbarkeit(p);
+        sichtbarkeit.update();
 
 		/*TitleAPI.sendTabTitle(p, "\n   §9§lRewex.de §8× §7Dein Minigames Netzwerk   "
 				+ "\n§7Derzeitiger Server §8× §aLobby #1"
@@ -59,6 +62,5 @@ public class ConnectListeners implements Listener {
     public void onLeave(PlayerKickEvent e) {
         e.setLeaveMessage("");
     }
-
 
 }

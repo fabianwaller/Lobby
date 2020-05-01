@@ -1,5 +1,7 @@
 package de.rewex.lobby.listeners.gadgets;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.FishHook;
@@ -27,6 +29,7 @@ public class Enterhaken implements Listener {
             vector.setZ((1.08D * distance) * (hookloc.getZ() - ploc.getZ()) / distance);
 
             p.setVelocity(vector);
+            p.spigot().playEffect(hookloc, Effect.ENDER_SIGNAL, 1, 0, 0, 0, 0, 1, 50, 20);
             p.getInventory().getItemInHand().setDurability((short)0);
             p.updateInventory();
         }

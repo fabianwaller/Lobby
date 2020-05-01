@@ -53,7 +53,7 @@ public class ChatListeners implements Listener {
                 Bukkit.reload();
                 Bukkit.broadcastMessage(Main.prefix + "Reload erfolgreich durchgeführt");
                 for (Player players : Bukkit.getOnlinePlayers()) {
-                    LocationManager.telLocation(players, "spawn");
+                    LocationManager.telLocation(players, "spawn", false);
                 }
                 e.setCancelled(true);
 

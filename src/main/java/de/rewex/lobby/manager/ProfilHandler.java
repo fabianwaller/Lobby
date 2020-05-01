@@ -114,7 +114,7 @@ public class ProfilHandler {
         this.einstellungen = Bukkit.createInventory(null, 54, einstellungenname);
         this.einstellungen.setItem(8, new ItemBuilder(Material.STAINED_GLASS_PANE,1,(short)14).setName("§cZurück").build());
 
-        ItemStack glass = new ItemBuilder(Material.STAINED_GLASS_PANE,1 ,(short) 15).setName("").build();
+        ItemStack glass = new ItemBuilder(Material.STAINED_GLASS_PANE,1 ,(short) 15).setName(" ").build();
         int j = 1;
         while(j < 54) {
             this.einstellungen.setItem(j, glass);
@@ -138,7 +138,7 @@ public class ProfilHandler {
         ItemStack deaktiviert = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.RED).setName("§cDeaktiviert").addEnchant(Enchantment.ARROW_DAMAGE, 1 ).setFlags().build();
 
         ItemStack jeder = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.LIME).setName("§aJeden Anzeigen").build();
-        ItemStack team = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitlgieder Anzeigen").build();
+        ItemStack team = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitglieder Anzeigen").build();
         ItemStack keinen = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.RED).setName("§cNiemanden Anzeigen").build();
         if(LobbySettings.getSichtbarkeit(p.getUniqueId().toString()) == 2) {
             this.einstellungen.setItem(2,
@@ -147,7 +147,7 @@ public class ProfilHandler {
             this.einstellungen.setItem(4, keinen);
         } else if(LobbySettings.getSichtbarkeit(p.getUniqueId().toString()) == 1) {
             this.einstellungen.setItem(2, jeder);
-            this.einstellungen.setItem(3, new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitlgieder Anzeigen").addUnsafeEnchantment(Enchantment.ARROW_DAMAGE,1).setFlags().build());
+            this.einstellungen.setItem(3, new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitglieder Anzeigen").addUnsafeEnchantment(Enchantment.ARROW_DAMAGE,1).setFlags().build());
             this.einstellungen.setItem(4, keinen);
         } else {
             this.einstellungen.setItem(2, jeder);
@@ -206,7 +206,7 @@ public class ProfilHandler {
         ItemStack deaktiviert = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.RED).setName("§cDeaktiviert").addEnchant(Enchantment.ARROW_DAMAGE, 1 ).setFlags().build();
 
         ItemStack jeder = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.LIME).setName("§aJeden Anzeigen").build();
-        ItemStack team = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitlgieder Anzeigen").build();
+        ItemStack team = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitglieder Anzeigen").build();
         ItemStack keinen = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.RED).setName("§cNiemanden Anzeigen").build();
         if(LobbySettings.getSichtbarkeit(p.getUniqueId().toString()) == 2) {
             inv.setItem(2,
@@ -215,7 +215,8 @@ public class ProfilHandler {
             inv.setItem(4, keinen);
         } else if(LobbySettings.getSichtbarkeit(p.getUniqueId().toString()) == 1) {
             inv.setItem(2, jeder);
-            inv.setItem(3, new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitlgieder Anzeigen").addUnsafeEnchantment(Enchantment.ARROW_DAMAGE,1).setFlags().build());
+            inv.setItem(3,
+                    new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitglieder Anzeigen").addUnsafeEnchantment(Enchantment.ARROW_DAMAGE,1).setFlags().build());
             inv.setItem(4, keinen);
         } else {
             inv.setItem(2, jeder);

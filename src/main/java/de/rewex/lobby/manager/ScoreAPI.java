@@ -1,6 +1,7 @@
 package de.rewex.lobby.manager;
 
 import de.rewex.lobby.Main;
+import de.rewex.lobby.manager.utils.TitleAPI;
 import de.rewex.mysql.players.gamepass.GamepassManager;
 import de.rewex.mysql.players.settings.LobbySettings;
 import de.rewex.mysql.players.stats.PlayersAPI;
@@ -51,7 +52,7 @@ public class ScoreAPI {
         Team admin = getTeam(sb, "000Admin", "§4Admin §7| §4", "");
         Team mod = getTeam(sb, "001Mod", "§9Mod §7| §9", "");
         Team sup = getTeam(sb, "002Sup", "§bSup §7| §b", "");
-        Team dev = getTeam(sb, "003Dev", "§dMod §7| §d", "");
+        Team dev = getTeam(sb, "003Dev", "§dDev §7| §d", "");
         Team builder = getTeam(sb, "004Builder", "§aBuilder §7| §a", "");
         Team content = getTeam(sb, "005Content", "§3Content §7| §3", "");
 
@@ -112,14 +113,14 @@ public class ScoreAPI {
             if(GamepassManager.hasPass(p.getUniqueId().toString())) {
                 obj.getScore(updateTeam(sb, "a", "§8➜ §aaktiviert", " §7/ §a✔", ChatColor.DARK_GREEN)).setScore(1);
             } else {
-                obj.getScore(updateTeam(sb, "b", "§8➜ §cdeaktivi", "ert §7/ §c✖", ChatColor.GRAY)).setScore(1);
+                obj.getScore(updateTeam(sb, "b", "§8➜ §cdeaktivi", "§cert §7/ §c✖", ChatColor.GRAY)).setScore(1);
             }
         }
 
         Team admin = getTeam(sb, "000Admin", "§4Admin §7| §4", "");
         Team mod = getTeam(sb, "001Mod", "§9Mod §7| §9", "");
         Team sup = getTeam(sb, "002Sup", "§bSup §7| §b", "");
-        Team dev = getTeam(sb, "003Dev", "§dMod §7| §d", "");
+        Team dev = getTeam(sb, "003Dev", "§dDev §7| §d", "");
         Team builder = getTeam(sb, "004Builder", "§aBuilder §7| §a", "");
         Team content = getTeam(sb, "005Content", "§3Content §7| §3", "");
 
@@ -194,9 +195,9 @@ public class ScoreAPI {
                     actionbarnumber = 0;
                 }
                 for(Player all:Bukkit.getOnlinePlayers()) {
-                   // updateScoreboard(all);
+                    updateScoreboard(all);
 
-                    /*if(actionbarnumber < 10) {
+                    if(actionbarnumber < 10) {
                         TitleAPI.sendActionBar(all, "§e+ §e§lBETAPHASE §7Release §f§lBUGREPORT §b§l/discord");
                     } else if(actionbarnumber < 20) {
                         TitleAPI.sendActionBar(all, "§b+ §9§lDiscord §7§lonline§7: §b§l/discord");
@@ -208,7 +209,7 @@ public class ScoreAPI {
                         TitleAPI.sendActionBar(all, "§c+ §b§lBUGFIXES §8§l+ §e§lVerbesserungen");
                     } else if(actionbarnumber < 60) {
                         TitleAPI.sendActionBar(all, "§e+ §6§lGAMEPASS §7Release: shop.rewex.de");
-                    }*/
+                    }
 
                 }
 

@@ -3,6 +3,7 @@ package de.rewex.lobby.listeners;
 import de.rewex.lobby.commands.BuildCmd;
 import de.rewex.lobby.manager.LocationManager;
 import de.rewex.mysql.players.settings.LobbySettings;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +26,7 @@ public class PlayerListeners implements Listener {
 				LocationManager.telLocation(p, "spawn");
 			}*/
             if(LocationManager.getLocation("spawn").distance(p.getLocation()) > 150) {
-                LocationManager.telLocation(p, "spawn");
+                LocationManager.telLocation(p, "spawn", false);
             }
         }
 

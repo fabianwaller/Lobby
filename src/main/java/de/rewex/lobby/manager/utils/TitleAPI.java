@@ -2,11 +2,16 @@ package de.rewex.lobby.manager.utils;
 
 import java.lang.reflect.Field;
 import org.bukkit.ChatColor;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-
+import net.minecraft.server.v1_8_R3.IChatBaseComponent;
+import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
+import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerListHeaderFooter;
+import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
+import net.minecraft.server.v1_8_R3.PlayerConnection;
 
 public class TitleAPI {
-    /*
+
     public static void sendTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String title, String subtitle) {
         PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
 
@@ -43,7 +48,6 @@ public class TitleAPI {
 	    header = header.replaceAll("%player%", player.getDisplayName());
 	    footer = footer.replaceAll("%player%", player.getDisplayName()); */
 
-        /*
         PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
         IChatBaseComponent tabTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + header + "\"}");
         IChatBaseComponent tabFoot = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + footer + "\"}");
@@ -71,5 +75,4 @@ public class TitleAPI {
         p.getHandle().playerConnection.sendPacket(ppoc);
     }
 
-    */
 }
