@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import de.rewex.lobby.Main;
 
 public class GamepassManager {
+
     public static void setPass(String uuid, long seconds) {
         long end = 0L;
         if(seconds == -1L) {

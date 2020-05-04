@@ -16,9 +16,9 @@ public class ShopListeners implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         if ((e.getAction() == Action.RIGHT_CLICK_BLOCK) || (e.getAction() == Action.RIGHT_CLICK_AIR)) {
             if (e.getItem() != null) {
-                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Main.getInstance().getInventoryHandler().getShopname())) {
+                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Main.getInstance().getInventoryHandler().getShopname() + " §8| §7Rechtsklick")) {
                    // e.getPlayer().openInventory(Main.getInstance().getInventoryHandler().getShopInventory());
-                    e.getPlayer().sendMessage("§7» §6Shop §7| §7Dieses Modul ist bald für Verfügbar§8!");
+                    e.getPlayer().sendMessage("§e•§6● Shop §7| §7Dieses Modul ist bald für Verfügbar§8!");
                     e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CLICK, 12.0F, 12.0F);
                     e.setCancelled(true);
                 }

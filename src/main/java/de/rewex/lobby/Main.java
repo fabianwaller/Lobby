@@ -29,10 +29,10 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 
 public class Main extends JavaPlugin implements PluginMessageListener {
 
-    public static String prefix = "§7» §aLobby §7| ";
-    public static String coinspr = "§7» §bCoins §7| ";
-    public static String tokenspr = "§7» §aTokens §7| ";
-    public static String passpr = "§7» §1Gamepass §7| ";
+    public static String prefix = "§2•§a● Lobby §7| ";
+    public static String coinspr = "§1•§b● Coins §7| ";
+    public static String tokenspr = "§2•§a● Tokens §7| ";
+    public static String passpr = "§e•§6● Gamepass §7| ";
     public static String noperm = prefix + "§cDazu hast du keine Rechte§8!";
     public static String offplayer = prefix + "§cDieser Spieler ist offline§8!";
     public static String noplayer = "[Lobby] Nur ein Spieler kann diesen Befehl ausführen";

@@ -16,7 +16,7 @@ public class LobbywechslerListeners implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         if ((e.getAction() == Action.RIGHT_CLICK_BLOCK) || (e.getAction() == Action.RIGHT_CLICK_AIR)) {
             if (e.getItem() != null) {
-                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Main.getInstance().getInventoryHandler().getLobbyname())) {
+                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Main.getInstance().getInventoryHandler().getLobbyname() + " §8| §7Rechtsklick")) {
                     Main.getInstance().getInventoryHandler().updateLobbyInventory();
                     e.getPlayer().openInventory(Main.getInstance().getInventoryHandler().getLobbyInventory());
                     e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CLICK, 12.0F, 12.0F);

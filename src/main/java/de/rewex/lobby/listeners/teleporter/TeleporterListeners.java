@@ -21,7 +21,7 @@ public class TeleporterListeners implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         if ((e.getAction() == Action.RIGHT_CLICK_BLOCK) || (e.getAction() == Action.RIGHT_CLICK_AIR)) {
             if (e.getItem() != null) {
-                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Main.getInstance().getInventoryHandler().getTeleportername())) {
+                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Main.getInstance().getInventoryHandler().getTeleportername() + " §8| §7Rechtsklick")) {
                     e.getPlayer().openInventory(Main.getInstance().getInventoryHandler().getTeleporterInventory());
                     e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CLICK, 12.0F, 12.0F);
                     if(LobbySettings.getAnimationen(e.getPlayer().getUniqueId().toString()) == true) {

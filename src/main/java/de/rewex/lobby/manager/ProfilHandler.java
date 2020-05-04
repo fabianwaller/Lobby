@@ -11,7 +11,9 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import java.util.ArrayList;
 
@@ -21,34 +23,23 @@ public class ProfilHandler {
     private String profilname = "Profil";
 
     private Inventory stats;
-    private String statsname = "§6Stats";
+    private String statsname = "§e•§6● Stats";
     private Inventory freunde;
-    private String freundename = "§aFreunde";
+    private String freundename = "§2•§a● Freunde";
     private Inventory clan;
-    private String clanname = "§bClan";
+    private String clanname = "§9•§b● Clan";
     private Inventory einstellungen;
-    private String einstellungenname = "§4Einstellungen";
+    private String einstellungenname = "§c•§4● Einstellungen";
 
 
     public ProfilHandler(Player p) {
-        this.profil = Bukkit.createInventory(null, 45, RangManager.getColor(p) + profilname);
-        Main.getInstance().getInventoryHandler().setLayout(profil);
-
-        this.profil.setItem(19, new ItemBuilder(Material.BOOK).setName("§6Stats").build());
-        ItemStack freunde = new ItemStack(Material.getMaterial(397), 1, (short) 3);
-        SkullMeta m = (SkullMeta)freunde.getItemMeta();
-        m.setDisplayName("§aFreunde");
-        m.setOwner(p.getName());
-        freunde.setItemMeta(m);
-        this.profil.setItem(21, freunde);
-        this.profil.setItem(23, new ItemBuilder(Material.IRON_CHESTPLATE).setName("§bClan").build());
-        this.profil.setItem(25, new ItemBuilder(Material.REDSTONE).setName("§4Einstellungen").build());
+        this.profil = Bukkit.createInventory(null, 54, RangManager.getSecondColor(p) + "•" + RangManager.getColor(p) + "● Profil");
 
         //Stats
-        this.stats = Bukkit.createInventory(null, 45, statsname);
-        this.stats.setItem(8, new ItemBuilder(Material.STAINED_GLASS_PANE,1,(short)14).setName("§cZurück").build());
+        this.stats = Bukkit.createInventory(null, 54, statsname);
+        setLayout(p, this.stats);
+        //this.stats.setItem(8, new ItemBuilder(Material.STAINED_GLASS_PANE,1,(short)14).setName("§cZurück").build());
 
-        Main.getInstance().getInventoryHandler().setLayout(stats);
 
         // FFA
         int ffakills = FFAStatsAPI.getKills(p.getUniqueId().toString());
@@ -59,17 +50,14 @@ public class ProfilHandler {
             ffakd = FFAStatsAPI.round(ffakd);
         }
         int killstreak = FFAStatsAPI.getKillstreak(p.getUniqueId().toString());
-        ArrayList<String> ffastats = new ArrayList<String>();
+        ArrayList<String> ffastats = new ArrayList<>();
 
         ffastats.add("§7Statistiken von " + RangManager.getName(p) + " §7(insgesamt)");
         ffastats.add("§8x §7Kills§8: §d" + ffakills);
         ffastats.add("§8x §7Deaths§8: §d" + ffadeaths);
         ffastats.add("§8x §7K/D§8: §d" + ffakd);
         ffastats.add("§8x §7Killstreak§8: §d" + killstreak);
-        this.stats.setItem(11, new ItemBuilder(Material.DIAMOND_CHESTPLATE).setName("§dFFA").setLore(ffastats).build());
-
-        //SOON
-        this.stats.setItem(15, new ItemBuilder(Material.STICK).setName("§7Soon").build());
+        this.stats.setItem(0, new ItemBuilder(Material.DIAMOND_CHESTPLATE).setName("§dFFA").setLore(ffastats).build());
 
         //Aura
         int aurakills = AuraStatsAPI.getKills(p.getUniqueId().toString());
@@ -88,7 +76,7 @@ public class ProfilHandler {
         } else {
             aurawinrate = 0;
         }
-        ArrayList<String> aurastats = new ArrayList<String>();
+        ArrayList<String> aurastats = new ArrayList<>();
         aurastats.add("§7Statistiken von " + RangManager.getName(p) + " §7(insgesamt)");
         aurastats.add("§8x §7Kills§8: §d" + aurakills);
         aurastats.add("§8x §7Deaths§8: §d" + auradeaths);
@@ -96,40 +84,39 @@ public class ProfilHandler {
         aurastats.add("§8x §7Gespielte Spiele§8: §d" + auramatches);
         aurastats.add("§8x §7Gewonnene Spiele§8: §d" + aurawins);
         aurastats.add("§8x §7Siegeswahrscheinlichkeit§8: §5" + aurawinrate + "%");
-        this.stats.setItem(29, new ItemBuilder(Material.ENDER_PEARL).setName("§5Aura").setLore(aurastats).build());
+        this.stats.setItem(1, new ItemBuilder(Material.ENDER_PEARL).setName("§5Aura").setLore(aurastats).build());
 
-        this.stats.setItem(33, new ItemBuilder(Material.DEAD_BUSH).setName("§7Soon").build());
 
         //Freunde
-        this.freunde = Bukkit.createInventory(null, 45, freundename);
-        this.freunde.setItem(8, new ItemBuilder(Material.STAINED_GLASS_PANE,1,(short)14).setName("§cZurück").build());
-        this.freunde.setItem(22, new ItemBuilder(Material.BARRIER).setName("§7Soon").build());
+        this.freunde = Bukkit.createInventory(null, 54, freundename);
+        setLayout(p, this.freunde);
+        this.freunde.setItem(0, new ItemBuilder(Material.BARRIER).setName("§7Soon").build());
 
         //Clan
-        this.clan = Bukkit.createInventory(null, 45, clanname);
-        this.clan.setItem(8, new ItemBuilder(Material.STAINED_GLASS_PANE,1,(short)14).setName("§cZurück").build());
-        this.clan.setItem(22, new ItemBuilder(Material.BARRIER).setName("§7Soon").build());
+        this.clan = Bukkit.createInventory(null, 54, clanname);
+        setLayout(p, this.clan);
+        this.clan.setItem(0, new ItemBuilder(Material.BARRIER).setName("§7Soon").build());
 
         //Einstellungen
         this.einstellungen = Bukkit.createInventory(null, 54, einstellungenname);
-        this.einstellungen.setItem(8, new ItemBuilder(Material.STAINED_GLASS_PANE,1,(short)14).setName("§cZurück").build());
+        setLayout(p, this.einstellungen);
 
         ItemStack glass = new ItemBuilder(Material.STAINED_GLASS_PANE,1 ,(short) 15).setName(" ").build();
         int j = 1;
-        while(j < 54) {
+        while(j < 45) {
             this.einstellungen.setItem(j, glass);
             j = j+9;
         }
-        for(int i=45; i<54; i++) {
+        for(int i=36; i<45; i++) {
             this.einstellungen.setItem(i, glass);
-            this.einstellungen.setItem(49,
+            this.einstellungen.setItem(40,
                     new ItemBuilder(Material.PAPER).setName("§7Seite 1/1").addLoreLine("§aLobby").build());
         }
         this.einstellungen.setItem(0, new ItemBuilder(Material.ENDER_PEARL).setName("§aSichtbarkeit").build());
         this.einstellungen.setItem(9, new ItemBuilder(Material.EYE_OF_ENDER).setName("§bAnimationen").build());
         this.einstellungen.setItem(18, new ItemBuilder(Material.NOTE_BLOCK).setName("§cHotbar Sounds").build());
         this.einstellungen.setItem(27, new ItemBuilder(Material.SIGN).setName("§eScoreboard").build());
-        this.einstellungen.setItem(36, new ItemBuilder(Material.WATCH).setName("§aLobby Echtzeit").build());
+        //this.einstellungen.setItem(36, new ItemBuilder(Material.WATCH).setName("§aLobby Echtzeit").build());
 
         ItemStack aktivieren = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.LIME).setName("§aAktivieren").build();
         ItemStack aktiviert =
@@ -175,29 +162,65 @@ public class ProfilHandler {
             this.einstellungen.setItem(29, aktivieren);
             this.einstellungen.setItem(30, deaktiviert);
         }
-        if(LobbySettings.getEchtzeit(p.getUniqueId().toString())==true) {
-            this.einstellungen.setItem(38, aktiviert);
-            this.einstellungen.setItem(39, deaktivieren);
+    }
+
+
+    public void setLayout(Player p, Inventory inv) {
+        if(inv == this.freunde) {
+            ItemStack freunde = new ItemStack(Material.getMaterial(397), 1, (short) 3);
+            SkullMeta m = (SkullMeta)freunde.getItemMeta();
+            m.setDisplayName("§aFreunde");
+            m.setOwner(p.getName());
+            freunde.setItemMeta(m);
+            inv.setItem(45, freunde);
         } else {
-            this.einstellungen.setItem(38, aktivieren);
-            this.einstellungen.setItem(39, deaktiviert);
+            ItemStack freunde = new ItemStack(Material.getMaterial(397), 1, (short) 3);
+            SkullMeta m = (SkullMeta)freunde.getItemMeta();
+            m.setDisplayName("§aFreunde");
+            m.setOwner(p.getName());
+            freunde.setItemMeta(m);
+            inv.setItem(45, freunde);
+        }
+        if(inv == this.clan) {
+            inv.setItem(46, new ItemBuilder(Material.IRON_CHESTPLATE).setName("§bClan").addEnchant(Enchantment.ARROW_DAMAGE,1).setFlags().build());
+        } else {
+            inv.setItem(46, new ItemBuilder(Material.IRON_CHESTPLATE).setName("§bClan").build());
+        }
+        if(inv == this.stats) {
+            inv.setItem(47, new ItemBuilder(Material.BOOK).setName("§6Stats").addEnchant(Enchantment.ARROW_DAMAGE,1).setFlags().build());
+        } else {
+            inv.setItem(47, new ItemBuilder(Material.BOOK).setName("§6Stats").build());
+        }
+        if(inv == this.einstellungen) {
+            inv.setItem(53, new ItemBuilder(Material.REDSTONE).setName("§4Einstellungen").addEnchant(Enchantment.ARROW_DAMAGE,1).setFlags().build());
+        } else {
+            inv.setItem(53, new ItemBuilder(Material.REDSTONE).setName("§4Einstellungen").build());
+        }
+        ItemStack glass = new ItemBuilder(Material.STAINED_GLASS_PANE,1 ,(short) 15).setName(" ").build();
+        for(int i=36; i<45; i++) {
+            inv.setItem(i, glass);
         }
     }
 
     public void updateEinstellungen(Player p, Inventory inv) {
-        //Einstellungen
-        inv.setItem(8, new ItemBuilder(Material.STAINED_GLASS_PANE,1,(short)14).setName("§cZurück").build());
+        setLayout(p, inv);
 
-        ItemStack glass = new ItemBuilder(Material.STAINED_GLASS_PANE,1 ,(short) 15).setName("").build();
-        for(int i=45; i<54; i++) {
-            inv.setItem(49,
+        ItemStack glass = new ItemBuilder(Material.STAINED_GLASS_PANE,1 ,(short) 15).setName(" ").build();
+        int j = 1;
+        while(j < 45) {
+            inv.setItem(j, glass);
+            j = j+9;
+        }
+        for(int i=36; i<45; i++) {
+            inv.setItem(i, glass);
+            inv.setItem(40,
                     new ItemBuilder(Material.PAPER).setName("§7Seite 1/1").addLoreLine("§aLobby").build());
         }
         inv.setItem(0, new ItemBuilder(Material.ENDER_PEARL).setName("§aSichtbarkeit").build());
         inv.setItem(9, new ItemBuilder(Material.EYE_OF_ENDER).setName("§bAnimationen").build());
         inv.setItem(18, new ItemBuilder(Material.NOTE_BLOCK).setName("§cHotbar Sounds").build());
         inv.setItem(27, new ItemBuilder(Material.SIGN).setName("§eScoreboard").build());
-        inv.setItem(36, new ItemBuilder(Material.WATCH).setName("§aLobby Echtzeit").build());
+        //this.einstellungen.setItem(36, new ItemBuilder(Material.WATCH).setName("§aLobby Echtzeit").build());
 
         ItemStack aktivieren = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.LIME).setName("§aAktivieren").build();
         ItemStack aktiviert =
@@ -209,14 +232,12 @@ public class ProfilHandler {
         ItemStack team = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitglieder Anzeigen").build();
         ItemStack keinen = new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.RED).setName("§cNiemanden Anzeigen").build();
         if(LobbySettings.getSichtbarkeit(p.getUniqueId().toString()) == 2) {
-            inv.setItem(2,
-                    new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.LIME).setName("§aJeden Anzeigen").addUnsafeEnchantment(Enchantment.ARROW_DAMAGE,1).setFlags().build());
+            inv.setItem(2, new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.LIME).setName("§aJeden Anzeigen").addUnsafeEnchantment(Enchantment.ARROW_DAMAGE,1).setFlags().build());
             inv.setItem(3, team);
             inv.setItem(4, keinen);
         } else if(LobbySettings.getSichtbarkeit(p.getUniqueId().toString()) == 1) {
             inv.setItem(2, jeder);
-            inv.setItem(3,
-                    new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitglieder Anzeigen").addUnsafeEnchantment(Enchantment.ARROW_DAMAGE,1).setFlags().build());
+            inv.setItem(3, new ItemBuilder(Material.WOOL).setWoolColor(DyeColor.PURPLE).setName("§5Teammitglieder Anzeigen").addUnsafeEnchantment(Enchantment.ARROW_DAMAGE,1).setFlags().build());
             inv.setItem(4, keinen);
         } else {
             inv.setItem(2, jeder);
@@ -243,13 +264,6 @@ public class ProfilHandler {
         } else {
             inv.setItem(29, aktivieren);
             inv.setItem(30, deaktiviert);
-        }
-        if(LobbySettings.getEchtzeit(p.getUniqueId().toString())==true) {
-            inv.setItem(38, aktiviert);
-            inv.setItem(39, deaktivieren);
-        } else {
-            inv.setItem(38, aktivieren);
-            inv.setItem(39, deaktiviert);
         }
     }
 

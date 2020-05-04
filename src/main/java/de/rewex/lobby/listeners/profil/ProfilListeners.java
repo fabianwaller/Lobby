@@ -12,10 +12,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
+
+import java.util.HashMap;
 
 public class ProfilListeners implements Listener {
 
     private ProfilHandler profilHandler;
+    public static HashMap<String, Inventory> current = new HashMap();
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
@@ -23,9 +27,9 @@ public class ProfilListeners implements Listener {
             Player p = e.getPlayer();
             profilHandler = new ProfilHandler(p);
             if (e.getItem() != null) {
-                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(RangManager.getColor(e.getPlayer()) + profilHandler.getProfilname())) {
+                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(RangManager.getSecondColor(p) + "•" + RangManager.getColor(p) + "● Profil §8| §7Rechtsklick")) {
 
-                    e.getPlayer().openInventory(profilHandler.getProfil());
+                    e.getPlayer().openInventory(getCurrent(p));
                     e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CLICK, 12.0F, 12.0F);
                     e.setCancelled(true);
                 }
@@ -40,20 +44,25 @@ public class ProfilListeners implements Listener {
             p = (Player) e.getWhoClicked();
         }
 
-        if(e.getInventory().getName().equals(RangManager.getColor(p) + profilHandler.getProfilname())) {
+        //if(e.getInventory().getName().equals(RangManager.getColor(p) + profilHandler.getProfilname())) {
+        if(e.getInventory() != null) {
             if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
 
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§6Stats")) {
-                    p.openInventory(profilHandler.getStats());
-                }
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§aFreunde")) {
                     p.openInventory(profilHandler.getFreunde());
+                    setCurrent(p, profilHandler.getFreunde());
                 }
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§bClan")) {
                     p.openInventory(profilHandler.getClan());
+                    setCurrent(p, profilHandler.getClan());
+                }
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§6Stats")) {
+                    p.openInventory(profilHandler.getStats());
+                    setCurrent(p, profilHandler.getStats());
                 }
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§4Einstellungen")) {
                     p.openInventory(profilHandler.getEinstellungen());
+                    setCurrent(p, profilHandler.getEinstellungen());
                 }
 
 
@@ -63,47 +72,9 @@ public class ProfilListeners implements Listener {
             e.setCancelled(true);
         }
 
-        if(e.getInventory().getName().equals(profilHandler.getStatsname())) {
-            if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
-
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cZurück")) {
-                    p.openInventory(profilHandler.getProfil());
-                }
-                p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
-            }
-            e.setCancelled(true);
-        }
-
-        if(e.getInventory().getName().equals(profilHandler.getFreundename())) {
-            if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
-
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cZurück")) {
-                    p.openInventory(profilHandler.getProfil());
-                }
-                p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
-            }
-            e.setCancelled(true);
-        }
-
-        if(e.getInventory().getName().equals(profilHandler.getClanname())) {
-            if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
-
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cZurück")) {
-                    p.openInventory(profilHandler.getProfil());
-                }
-                p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
-            }
-            e.setCancelled(true);
-        }
 
         if(e.getInventory().getName().equals(profilHandler.getEinstellungenname())) {
             if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
-
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cZurück")) {
-                    p.openInventory(profilHandler.getProfil());
-                    p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
-                    return;
-                }
 
                 String action = e.getCurrentItem().getItemMeta().getDisplayName();
                 if(action.equalsIgnoreCase("§aJeden Anzeigen")) {
@@ -159,11 +130,22 @@ public class ProfilListeners implements Listener {
                     }
                 }
 
-                profilHandler.updateEinstellungen(p, profilHandler.getEinstellungen());
+                this.profilHandler.updateEinstellungen(p, profilHandler.getEinstellungen());
                 p.updateInventory();
             }
             e.setCancelled(true);
         }
+    }
+
+    public Inventory getCurrent(Player p) {
+        if(current.get(p.getName()) == null) {
+            return profilHandler.getFreunde();
+        }
+        return current.get(p.getName());
+    }
+
+    public void setCurrent(Player p, Inventory inv) {
+        current.put(p.getName(), inv);
     }
 
 }

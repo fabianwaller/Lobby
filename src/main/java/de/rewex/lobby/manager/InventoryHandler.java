@@ -18,11 +18,11 @@ public class InventoryHandler {
     private Inventory shop;
     private Inventory lobby;
 
-    public String teleportername = "§7Teleporter";
-    private String enterhakenname = "§7Enterhaken";
-    private String shopname = "§6Shop";
-    private String nickname = "§5Autonick";
-    private String lobbyname = "§7Lobby Wechsler";
+    public String teleportername = "§b•§9● Teleporter";
+    private String enterhakenname = "§8•§7● Enterhaken";
+    private String shopname = "§e•§6● Shop";
+    private String nickname = "§d•§5● Autonick";
+    private String lobbyname = "§2•§a● Lobby Wechsler";
 
     public InventoryHandler(){
 
@@ -37,8 +37,8 @@ public class InventoryHandler {
         this.teleporter.setItem(29, new ItemBuilder(Material.SANDSTONE,0).setName("§7Soon").build());
 
         this.teleporter.setItem(24, new ItemBuilder(Material.ENDER_PEARL, 1).setName("§5Aura").build());
-        this.teleporter.setItem(25, new ItemBuilder(Material.DEAD_BUSH, 0).setName("§7Soon").build());
-        this.teleporter.setItem(33, new ItemBuilder(Material.WORKBENCH, 0).setName("§7Soon").build());
+        this.teleporter.setItem(25, new ItemBuilder(Material.WORKBENCH, 0).setName("§7Soon").build());
+        this.teleporter.setItem(33, new ItemBuilder(Material.REDSTONE_LAMP_OFF, 0).setName("§7Soon").build());
 
         this.shop = Bukkit.createInventory(null, 45, shopname);
         this.shop.setItem(22, new ItemBuilder(Material.BARRIER).setName("§7Soon").build());
@@ -72,21 +72,22 @@ public class InventoryHandler {
         @SuppressWarnings("deprecation")
         ItemStack head = new ItemStack(Material.getMaterial(397), 1, (short) 3);
         SkullMeta m = (SkullMeta)head.getItemMeta();
-        m.setDisplayName(RangManager.getColor(p) + "Profil");
+        m.setDisplayName(RangManager.getSecondColor(p) + "•" + RangManager.getColor(p) + "● Profil §8| §7Rechtsklick");
         m.setOwner(p.getName());
         head.setItemMeta(m);
 
-        p.getInventory().setItem(0, new ItemBuilder(Material.RECORD_6).setName(teleportername).build());
-        p.getInventory().setItem(1, new ItemBuilder(Material.FISHING_ROD).setName(enterhakenname).setInfinityDurability().build());
+        p.getInventory().setItem(0, new ItemBuilder(Material.RECORD_6).setName(teleportername + " §8| §7Rechtsklick").build());
+        p.getInventory().setItem(1,
+                new ItemBuilder(Material.FISHING_ROD).setName(enterhakenname  + " §8| §7Rechtsklick").setInfinityDurability().setFlags().build());
 
         p.getInventory().setItem(4,
-                new ItemBuilder(Material.ENDER_CHEST).setName(shopname).addEnchant(Enchantment.DAMAGE_ALL,1 ).setFlags().build());
+                new ItemBuilder(Material.ENDER_CHEST).setName(shopname  + " §8| §7Rechtsklick").addEnchant(Enchantment.DAMAGE_ALL,1 ).setFlags().build());
 
         if(p.hasPermission("server.nick")) {
-            p.getInventory().setItem(6, new ItemBuilder(Material.NAME_TAG).setName(nickname).build());
+            p.getInventory().setItem(6, new ItemBuilder(Material.NAME_TAG).setName(nickname  + " §8| §7Rechtsklick").build());
         }
         p.getInventory().setItem(7, head);
-        p.getInventory().setItem(8, new ItemBuilder(Material.NETHER_STAR).setName(lobbyname).build());
+        p.getInventory().setItem(8, new ItemBuilder(Material.NETHER_STAR).setName(lobbyname  + " §8| §7Rechtsklick").build());
 
     }
 

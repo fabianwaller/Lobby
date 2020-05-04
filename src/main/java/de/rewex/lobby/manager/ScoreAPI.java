@@ -97,7 +97,8 @@ public class ScoreAPI {
 
     }
 
-    @SuppressWarnings({ "deprecation", "unused" })
+    static int animatenumber = 0;
+
     public static void updateScoreboard(Player p) {
         if(p.getScoreboard() == null) {
             setScoreboard(p);
@@ -197,7 +198,7 @@ public class ScoreAPI {
                 for(Player all:Bukkit.getOnlinePlayers()) {
                     updateScoreboard(all);
 
-                    if(actionbarnumber < 10) {
+                    /*if(actionbarnumber < 10) {
                         TitleAPI.sendActionBar(all, "§e+ §e§lBETAPHASE §7Release §f§lBUGREPORT §b§l/discord");
                     } else if(actionbarnumber < 20) {
                         TitleAPI.sendActionBar(all, "§b+ §9§lDiscord §7§lonline§7: §b§l/discord");
@@ -209,8 +210,8 @@ public class ScoreAPI {
                         TitleAPI.sendActionBar(all, "§c+ §b§lBUGFIXES §8§l+ §e§lVerbesserungen");
                     } else if(actionbarnumber < 60) {
                         TitleAPI.sendActionBar(all, "§e+ §6§lGAMEPASS §7Release: shop.rewex.de");
-                    }
-
+                    }*/
+                    //TitleAPI.sendActionBar(all, "§2•§a● Chat §7| §aAN §8- §9Spielzeit§8: §7SOON");
                 }
 
                 actionbarnumber++;
