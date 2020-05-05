@@ -5,6 +5,7 @@ import de.rewex.lobby.manager.utils.TitleAPI;
 import de.rewex.mysql.players.gamepass.GamepassManager;
 import de.rewex.mysql.players.settings.LobbySettings;
 import de.rewex.mysql.players.stats.PlayersAPI;
+import de.rewex.mysql.players.stats.Spielzeit;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -211,7 +212,7 @@ public class ScoreAPI {
                     } else if(actionbarnumber < 60) {
                         TitleAPI.sendActionBar(all, "§e+ §6§lGAMEPASS §7Release: shop.rewex.de");
                     }*/
-                    //TitleAPI.sendActionBar(all, "§2•§a● Chat §7| §aAN §8- §9Spielzeit§8: §7SOON");
+                    TitleAPI.sendActionBar(all, "§7Chat §8● §aAn §8| §7Spielzeit §8● " + Spielzeit.getSpielzeit(all.getUniqueId().toString()));
                 }
 
                 actionbarnumber++;

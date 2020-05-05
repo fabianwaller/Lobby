@@ -4,6 +4,7 @@ import de.rewex.lobby.Main;
 import de.rewex.lobby.manager.utils.ItemBuilder;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ public class InventoryHandler {
     private Inventory lobby;
 
     public String teleportername = "§b•§9● Teleporter";
-    private String enterhakenname = "§8•§7● Enterhaken";
+    private String enterhakenname = "§6•§e● Enterhaken";
     private String shopname = "§e•§6● Shop";
     private String nickname = "§d•§5● Autonick";
     private String lobbyname = "§2•§a● Lobby Wechsler";
@@ -43,7 +44,7 @@ public class InventoryHandler {
         this.shop = Bukkit.createInventory(null, 45, shopname);
         this.shop.setItem(22, new ItemBuilder(Material.BARRIER).setName("§7Soon").build());
 
-        this.lobby = Bukkit.createInventory(null, 9, "§7Lobby Wechsler");
+        this.lobby = Bukkit.createInventory(null, 9, "§2•§a● Lobby Wechsler");
         Main.getInstance().getCloudServer().getLobbys().forEach(item -> {
             lobby.addItem();
         });
@@ -51,7 +52,7 @@ public class InventoryHandler {
     }
 
     public void updateLobbyInventory(){
-        this.lobby = Bukkit.createInventory(null, 9, "§7Lobby Wechsler");
+        this.lobby = Bukkit.createInventory(null, 9, "§2•§a● Lobby Wechsler");
 
         Main.getInstance().getCloudServer().getLobbys().forEach(item -> {
             lobby.addItem(item);
@@ -69,6 +70,8 @@ public class InventoryHandler {
             p.removePotionEffect(effect.getType());
         }
 
+        //p.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS).setLeatherArmorColor(Color.BLUE).setName("§9Lobbyboots")
+        // .build());
         @SuppressWarnings("deprecation")
         ItemStack head = new ItemStack(Material.getMaterial(397), 1, (short) 3);
         SkullMeta m = (SkullMeta)head.getItemMeta();

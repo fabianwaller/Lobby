@@ -126,4 +126,25 @@ public class PlayersAPI {
         }
     }
 
+    public static Long getSpielzeit(String uuid) {
+        Long l = Long.valueOf(0);
+        if (playerExists(uuid)) {
+            try {
+                ResultSet rs = MySQL.getResult("SELECT * FROM PLAYERS WHERE UUID='" + uuid + "'");
+                if (rs.next()) {
+                    Long.valueOf(rs.getInt("SPIELZEIT"));
+                }
+                l = Long.valueOf(rs.getInt("SPIELZEIT"));
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            createPlayer(uuid);
+            getSpielzeit(uuid);
+        }
+        return l;
+    }
+
 }
