@@ -1,9 +1,7 @@
 package de.rewex.lobby.listeners.gadgets;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
+import org.bukkit.entity.Fish;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,24 +12,41 @@ import org.bukkit.util.Vector;
 public class Enterhaken implements Listener {
 
     @EventHandler
-    public void onEnterhaken(PlayerFishEvent e) {
-        Player p = e.getPlayer();
-        FishHook hook = e.getHook();
-        if(hook.getLocation().subtract(0, 1, 0).getBlock().getType() != Material.AIR) {
-            Location ploc = p.getLocation();
+    public void onEnterhaken(PlayerFishEvent event) {
+        Player p = event.getPlayer();
+        FishHook hook = event.getHook();
+        if ((event.getState().equals(PlayerFishEvent.State.IN_GROUND)) ||
+                (event.getState().equals(PlayerFishEvent.State.CAUGHT_ENTITY)) ||
+                (event.getState().equals(PlayerFishEvent.State.FAILED_ATTEMPT))) {
             Location hookloc = hook.getLocation();
+            if (Bukkit.getWorld(event.getPlayer().getWorld().getName()).getBlockAt(hook.getLocation().getBlockX(),
+                    hook.getLocation().getBlockY() - 1, hook.getLocation().getBlockZ()).getType() != Material.AIR) {
+                if (Bukkit.getWorld(event.getPlayer().getWorld().getName()).getBlockAt(hook.getLocation().getBlockX(), hook.getLocation().getBlockY() - 1, hook.getLocation().getBlockZ()).getType() != Material.STATIONARY_WATER) {
+                    Location lc = p.getLocation();
+                    Location to = event.getHook().getLocation();
 
-            Vector vector = p.getVelocity();
-            double distance = ploc.distance(hookloc);
+                    lc.setY(lc.getY() + 0.5D);
+                    p.teleport(lc);
 
-            vector.setX((1.08D * distance) * (hookloc.getX() - ploc.getX()) / distance);
-            vector.setY((1D * distance) * (hookloc.getY() - ploc.getY()) / distance - -0.05D * distance);
-            vector.setZ((1.08D * distance) * (hookloc.getZ() - ploc.getZ()) / distance);
+                    double g = -0.08D;
+                    double d = to.distance(lc);
+                    double t = d;
+                    double v_x = (1.0D + 0.07D * t) * (to.getX() - lc.getX()) / t;
+                    double v_y = (1.0D + 0.03D * t) * (to.getY() - lc.getY()) / t - 0.5D * g * t;
+                    double v_z = (1.0D + 0.07D * t) * (to.getZ() - lc.getZ()) / t;
 
-            p.setVelocity(vector);
-            p.spigot().playEffect(hookloc, Effect.ENDER_SIGNAL, 1, 0, 0, 0, 0, 1, 50, 20);
-            p.getInventory().getItemInHand().setDurability((short)0);
-            p.updateInventory();
+                    Vector v = p.getVelocity();
+                    v.setX(v_x);
+                    v.setY(v_y);
+                    v.setZ(v_z);
+                    p.setVelocity(v);
+
+                    p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 2.0F, 2.0F);
+                    p.spigot().playEffect(hookloc, Effect.ENDER_SIGNAL, 1, 0, 0, 0, 0, 1, 100, 20);
+                    p.getInventory().getItemInHand().setDurability((short)0);
+                    p.updateInventory();
+                }
+            }
         }
     }
 

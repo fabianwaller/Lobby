@@ -100,7 +100,7 @@ public class ScoreAPI {
 
     static int animatenumber = 0;
 
-    public static void updateScoreboard(Player p) {
+    public static void updateScoreboard(Player p, int scorenumber) {
         if(p.getScoreboard() == null) {
             setScoreboard(p);
         }
@@ -112,6 +112,10 @@ public class ScoreAPI {
             obj.getScore(updateTeam(sb, "Rang", "§8➜ " + RangManager.getRang(p), "", ChatColor.BLACK)).setScore(10);
             obj.getScore(updateTeam(sb, "Coins", "§8➜ §b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
             obj.getScore(updateTeam(sb, "Tokens", "§8➜ §a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
+
+            obj.getScore("").setScore(2);
+            obj.getScore("").setScore(1);
+            obj.getScore("§8•§7● Gamepass").setScore(2);
             if(GamepassManager.hasPass(p.getUniqueId().toString())) {
                 obj.getScore(updateTeam(sb, "a", "§8➜ §aaktiviert", " §7/ §a✔", ChatColor.DARK_GREEN)).setScore(1);
             } else {
@@ -185,10 +189,12 @@ public class ScoreAPI {
         return entry.toString();
     }
 
+    private static int scorenumber;
     private static int actionbarnumber;
 
     public static void startUpdater() {
         actionbarnumber = 0;
+        scorenumber = 0;
         new BukkitRunnable() {
 
             @Override
@@ -196,26 +202,17 @@ public class ScoreAPI {
                 if(actionbarnumber == 50) {
                     actionbarnumber = 0;
                 }
+                if(scorenumber == 15) {
+                    scorenumber = 0;
+                }
                 for(Player all:Bukkit.getOnlinePlayers()) {
-                    updateScoreboard(all);
+                    updateScoreboard(all, scorenumber);
 
-                    /*if(actionbarnumber < 10) {
-                        TitleAPI.sendActionBar(all, "§e+ §e§lBETAPHASE §7Release §f§lBUGREPORT §b§l/discord");
-                    } else if(actionbarnumber < 20) {
-                        TitleAPI.sendActionBar(all, "§b+ §9§lDiscord §7§lonline§7: §b§l/discord");
-                    } else if(actionbarnumber < 30) {
-                        TitleAPI.sendActionBar(all, "§5+ §f§lNEUES §5§lAURA§7-§d§lUPDATE");
-                    } else if(actionbarnumber < 40) {
-                        TitleAPI.sendActionBar(all, "§e+ §7NEUES §9§lRangsystem §8§l+ §b§lREWARDSYSTEM");
-                    } else if(actionbarnumber < 50) {
-                        TitleAPI.sendActionBar(all, "§c+ §b§lBUGFIXES §8§l+ §e§lVerbesserungen");
-                    } else if(actionbarnumber < 60) {
-                        TitleAPI.sendActionBar(all, "§e+ §6§lGAMEPASS §7Release: shop.rewex.de");
-                    }*/
                     TitleAPI.sendActionBar(all, "§7Chat §8● §aAn §8| §7Spielzeit §8● " + Spielzeit.getSpielzeit(all.getUniqueId().toString()));
                 }
 
                 actionbarnumber++;
+                scorenumber++;
 
             }
         }.runTaskTimer(Main.getInstance(), 20, 20);

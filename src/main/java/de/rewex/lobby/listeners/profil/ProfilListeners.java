@@ -19,7 +19,6 @@ import java.util.HashMap;
 public class ProfilListeners implements Listener {
 
     private ProfilHandler profilHandler;
-    public static HashMap<String, Inventory> current = new HashMap();
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
@@ -29,7 +28,7 @@ public class ProfilListeners implements Listener {
             if (e.getItem() != null) {
                 if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(RangManager.getSecondColor(p) + "•" + RangManager.getColor(p) + "● Profil §8| §7Rechtsklick")) {
 
-                    e.getPlayer().openInventory(getCurrent(p));
+                    e.getPlayer().openInventory(profilHandler.getEinstellungen());
                     e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CLICK, 12.0F, 12.0F);
                     e.setCancelled(true);
                 }
@@ -50,19 +49,19 @@ public class ProfilListeners implements Listener {
 
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§aFreunde")) {
                     p.openInventory(profilHandler.getFreunde());
-                    setCurrent(p, profilHandler.getFreunde());
+                    //setCurrent(p, profilHandler.getFreunde());
                 }
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§bClan")) {
                     p.openInventory(profilHandler.getClan());
-                    setCurrent(p, profilHandler.getClan());
+                    //setCurrent(p, profilHandler.getClan());
                 }
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§6Stats")) {
                     p.openInventory(profilHandler.getStats());
-                    setCurrent(p, profilHandler.getStats());
+                    //setCurrent(p, profilHandler.getStats());
                 }
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§4Einstellungen")) {
                     p.openInventory(profilHandler.getEinstellungen());
-                    setCurrent(p, profilHandler.getEinstellungen());
+                    //setCurrent(p, profilHandler.getEinstellungen());
                 }
 
 
@@ -137,7 +136,7 @@ public class ProfilListeners implements Listener {
         }
     }
 
-    public Inventory getCurrent(Player p) {
+    /*public Inventory getCurrent(Player p) {
         if(current.get(p.getName()) == null) {
             return profilHandler.getFreunde();
         }
@@ -146,6 +145,6 @@ public class ProfilListeners implements Listener {
 
     public void setCurrent(Player p, Inventory inv) {
         current.put(p.getName(), inv);
-    }
+    }*/
 
 }

@@ -80,7 +80,6 @@ public class RangManager {
 
     }
 
-
     public static String getSecondColor(Player p) {
         if(p.hasPermission("team.admin")) {
             return "§c";
