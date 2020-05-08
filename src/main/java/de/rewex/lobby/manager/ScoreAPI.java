@@ -113,8 +113,6 @@ public class ScoreAPI {
             obj.getScore(updateTeam(sb, "Coins", "§8➜ §b" + PlayersAPI.getCoins(p.getUniqueId().toString()), "", ChatColor.AQUA)).setScore(7);
             obj.getScore(updateTeam(sb, "Tokens", "§8➜ §a" + PlayersAPI.getTokens(p.getUniqueId().toString()), "", ChatColor.GREEN)).setScore(4);
 
-            obj.getScore("").setScore(2);
-            obj.getScore("").setScore(1);
             obj.getScore("§8•§7● Gamepass").setScore(2);
             if(GamepassManager.hasPass(p.getUniqueId().toString())) {
                 obj.getScore(updateTeam(sb, "a", "§8➜ §aaktiviert", " §7/ §a✔", ChatColor.DARK_GREEN)).setScore(1);
