@@ -4,6 +4,7 @@ import de.rewex.lobby.Main;
 import de.rewex.lobby.manager.LocationManager;
 import de.rewex.lobby.manager.ScoreAPI;
 import de.rewex.lobby.manager.Sichtbarkeit;
+import de.rewex.mysql.players.rewards.RewardManager;
 import de.rewex.mysql.players.settings.LobbySettings;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -28,11 +29,11 @@ public class ConnectListeners implements Listener {
         p.setExp(0.0F);
         p.setLevel(0);
         Main.getInstance().getInventoryHandler().setPlayerinv(p);
-        LocationManager.telLocation(p, "spawn", false);
+        //LocationManager.telLocation(p, "spawn", false);
 
 
-        /*RewardManager.createPlayer(p.getUniqueId().toString());
-        if(RewardManager.getAllowDailyCoinsReward(p.getUniqueId().toString())) {
+        RewardManager.createPlayer(p.getUniqueId().toString());
+        /*if(RewardManager.getAllowDailyCoinsReward(p.getUniqueId().toString())) {
             RewardManager.setReward(p);
         } else {
             p.sendMessage(Main.coinspr + "§7Tägliche Belohnung verfügbar in " + RewardManager.getRemainingTime(p.getUniqueId().toString()));

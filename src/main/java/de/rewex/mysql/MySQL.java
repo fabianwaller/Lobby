@@ -50,10 +50,12 @@ public class MySQL {
             try {
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS LOBBYSETTINGS (UUID VARCHAR(64), Sichtbarkeit int, " +
                         "Animationen int, Hotbarsounds int, Scoreboard int, Echtzeit int)");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS REWARDS (UUID VARCHAR(64), LOGIN VARCHAR(64), DAILY int, PASSDAILY int)");
                 Bukkit.getConsoleSender().sendMessage(prefix + "§aLOBBYSETTINGS §7TABLE §acreated");
+                Bukkit.getConsoleSender().sendMessage(prefix + "§bREWARDS §7TABLE §acreated");
             }
             catch (SQLException e) {
-                Bukkit.getConsoleSender().sendMessage(prefix + "§cERROR §7while creating §aLOBBYSETTINGS §7TABLE");
+                Bukkit.getConsoleSender().sendMessage(prefix + "§cERROR §7while creating §aLOBBYSETTINGS §7/ §bREWARDS §7TABLE");
                 e.printStackTrace();
             }
         }

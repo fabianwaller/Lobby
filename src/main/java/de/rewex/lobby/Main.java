@@ -6,6 +6,7 @@ import de.rewex.cloud.CloudServer;
 import de.rewex.cloud.CloudServiceListeners;
 import de.rewex.lobby.commands.StatsCmd;
 import de.rewex.lobby.listeners.autonick.AutonickListeners;
+import de.rewex.lobby.listeners.chests.DailyChests;
 import de.rewex.lobby.listeners.gadgets.Enterhaken;
 import de.rewex.lobby.listeners.lobbywechsler.LobbywechslerListeners;
 import de.rewex.lobby.listeners.profil.ProfilListeners;
@@ -18,10 +19,12 @@ import de.rewex.lobby.listeners.ConnectListeners;
 import de.rewex.lobby.listeners.LobbyProtect;
 import de.rewex.lobby.listeners.PlayerListeners;
 import de.rewex.lobby.manager.InventoryHandler;
+import de.rewex.lobby.manager.RewardHandler;
 import de.rewex.lobby.manager.ScoreAPI;
 import de.rewex.lobby.manager.switchblocks.SwitchBlock;
 import de.rewex.mysql.MySQL;
 import org.bukkit.Bukkit;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -98,6 +101,10 @@ public class Main extends JavaPlugin implements PluginMessageListener {
         pm.registerEvents(new ChatListeners(), this);
 
         //de.rewex.lobby.listeners
+
+        // chests
+        pm.registerEvents(new DailyChests(), this);
+
         //Gadgets
         pm.registerEvents(new Enterhaken(), this);
 
