@@ -1,7 +1,7 @@
 package de.rewex.lobby.manager.switchblocks;
 
 import com.google.common.collect.Lists;
-import de.rewex.lobby.Main;
+import de.rewex.lobby.Lobby;
 import de.rewex.lobby.manager.LocationManager;
 import org.bukkit.Location;
 
@@ -52,7 +52,7 @@ public class SwitchBlock {
             SwitchBlock.getSwitchblocks().add(switchBlock);
         });
 
-        Main.getInstance().getServer().getScheduler().runTaskTimer(Main.getInstance(), new AnimateTask(), 0L, 15L);
+        Lobby.getInstance().getServer().getScheduler().runTaskTimer(Lobby.getInstance(), new AnimateTask(), 0L, 15L);
     }
 
 

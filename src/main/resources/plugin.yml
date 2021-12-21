@@ -1,7 +1,7 @@
 name: Lobby
-version: 1.2-SNAPSHOT
+version: 1.4-SNAPSHOT
 author: Rewex
-main: de.rewex.lobby.Main
+main: de.rewex.lobby.Lobby
 commands:
   build: #server.build
   setlocation: #lobby.setloc

@@ -6,6 +6,9 @@ import java.sql.SQLException;
 
 public class PlayersAPI {
 
+    // updated version 24.05 00:19
+    // + Level Support
+
     public static boolean playerExists(String uuid) {
         try {
             ResultSet rs = MySQL.getResult("SELECT * FROM PLAYERS WHERE UUID='" + uuid + "'");
@@ -23,8 +26,8 @@ public class PlayersAPI {
 
     public static void createPlayer(String uuid) {
         if (!playerExists(uuid)) {
-            MySQL.update("INSERT INTO PLAYERS (UUID, COINS, TOKENS, GAMEPASS, SPIELZEIT, ONLINE) VALUES ('" + uuid + "', '0', '0', '0', " +
-                    "'0', '0');");
+            MySQL.update("INSERT INTO PLAYERS (UUID, COINS, TOKENS, LEVEL, GAMEPASS, SPIELZEIT, ONLINE) VALUES ('" + uuid + "', '0'," +
+                    " '0', '0', '0', '0', '0');");
         }
     }
 
@@ -123,6 +126,44 @@ public class PlayersAPI {
         } else {
             createPlayer(uuid);
             removeTokens(uuid, coins);
+        }
+    }
+
+    public static Integer getLevel(String uuid) {
+        Integer i = Integer.valueOf(0);
+        if (playerExists(uuid)) {
+            try {
+                ResultSet rs = MySQL.getResult("SELECT * FROM PLAYERS WHERE UUID='" + uuid + "'");
+                if (rs.next()) {
+                    i = Integer.valueOf(rs.getInt("LEVEL"));
+                }
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            createPlayer(uuid);
+            getLevel(uuid);
+        }
+        return i;
+    }
+
+    public static void setLevel(String uuid, Integer level) {
+        if (playerExists(uuid)) {
+            MySQL.update("UPDATE PLAYERS SET LEVEL='" + level + "' WHERE UUID='" + uuid + "'");
+        } else {
+            createPlayer(uuid);
+            setLevel(uuid, level);
+        }
+    }
+
+    public static void addLevel(String uuid, Integer level) {
+        if (playerExists(uuid)) {
+            setLevel(uuid, Integer.valueOf(getLevel(uuid).intValue() + level.intValue()));
+        } else {
+            createPlayer(uuid);
+            addLevel(uuid, level);
         }
     }
 

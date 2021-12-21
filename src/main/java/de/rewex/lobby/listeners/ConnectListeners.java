@@ -1,7 +1,6 @@
 package de.rewex.lobby.listeners;
 
-import de.rewex.lobby.Main;
-import de.rewex.lobby.manager.LocationManager;
+import de.rewex.lobby.Lobby;
 import de.rewex.lobby.manager.ScoreAPI;
 import de.rewex.lobby.manager.Sichtbarkeit;
 import de.rewex.mysql.players.rewards.RewardManager;
@@ -28,7 +27,7 @@ public class ConnectListeners implements Listener {
         p.setFoodLevel(20);
         p.setExp(0.0F);
         p.setLevel(0);
-        Main.getInstance().getInventoryHandler().setPlayerinv(p);
+        Lobby.getInstance().getInventoryHandler().setPlayerinv(p);
         //LocationManager.telLocation(p, "spawn", false);
 
 

@@ -19,18 +19,16 @@ import de.rewex.lobby.listeners.ConnectListeners;
 import de.rewex.lobby.listeners.LobbyProtect;
 import de.rewex.lobby.listeners.PlayerListeners;
 import de.rewex.lobby.manager.InventoryHandler;
-import de.rewex.lobby.manager.RewardHandler;
 import de.rewex.lobby.manager.ScoreAPI;
 import de.rewex.lobby.manager.switchblocks.SwitchBlock;
 import de.rewex.mysql.MySQL;
 import org.bukkit.Bukkit;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
-public class Main extends JavaPlugin implements PluginMessageListener {
+public class Lobby extends JavaPlugin implements PluginMessageListener {
 
     public static String prefix = "§2•§a● Lobby §7| ";
     public static String coinspr = "§1•§b● Coins §7| ";
@@ -40,11 +38,11 @@ public class Main extends JavaPlugin implements PluginMessageListener {
     public static String offplayer = prefix + "§cDieser Spieler ist offline§8!";
     public static String noplayer = "[Lobby] Nur ein Spieler kann diesen Befehl ausführen";
 
-    public static Main instance;
+    public static Lobby instance;
     private CloudServer cloudServer;
     private InventoryHandler inventoryHandler;
 
-    public static Main getInstance() {
+    public static Lobby getInstance() {
         return instance;
     }
 
@@ -55,7 +53,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
         this.cloudServer = new CloudServer();
         this.inventoryHandler = new InventoryHandler();
 
-        getServer().getMessenger().registerOutgoingPluginChannel(Main.getInstance(), "BungeeCord");
+        getServer().getMessenger().registerOutgoingPluginChannel(Lobby.getInstance(), "BungeeCord");
         getServer().getMessenger().registerOutgoingPluginChannel(this, "LABYMOD");
         getServer().getMessenger().registerIncomingPluginChannel(this, "WDL|INIT", this);
         getServer().getMessenger().registerOutgoingPluginChannel(this, "WDL|CONTROL");
@@ -78,12 +76,12 @@ public class Main extends JavaPlugin implements PluginMessageListener {
 
         SwitchBlock.startAnimateTask();
 
-        Bukkit.getConsoleSender().sendMessage(Main.prefix + "§aPlugin aktiviert §7[§a" + getDescription().getVersion() + "]");
+        Bukkit.getConsoleSender().sendMessage(Lobby.prefix + "§aPlugin aktiviert §7[§a" + getDescription().getVersion() + "]");
     }
 
     @Override
     public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(Main.prefix + "§cPlugin deaktiviert");
+        Bukkit.getConsoleSender().sendMessage(Lobby.prefix + "§cPlugin deaktiviert");
     }
 
     private void registerCommands() {

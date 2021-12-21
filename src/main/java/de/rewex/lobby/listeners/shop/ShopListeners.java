@@ -1,7 +1,6 @@
 package de.rewex.lobby.listeners.shop;
 
-import de.dytanic.cloudnet.ext.bridge.BridgePlayerManager;
-import de.rewex.lobby.Main;
+import de.rewex.lobby.Lobby;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +15,7 @@ public class ShopListeners implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         if ((e.getAction() == Action.RIGHT_CLICK_BLOCK) || (e.getAction() == Action.RIGHT_CLICK_AIR)) {
             if (e.getItem() != null) {
-                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Main.getInstance().getInventoryHandler().getShopname() + " §8| §7Rechtsklick")) {
+                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Lobby.getInstance().getInventoryHandler().getShopname() + " §8| §7Rechtsklick")) {
                    // e.getPlayer().openInventory(Main.getInstance().getInventoryHandler().getShopInventory());
                     e.getPlayer().sendMessage("§e•§6● Shop §7| §7Dieses Modul ist bald für Verfügbar§8!");
                     e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CLICK, 12.0F, 12.0F);
@@ -33,7 +32,7 @@ public class ShopListeners implements Listener {
             p = (Player) e.getWhoClicked();
         }
 
-        if(e.getInventory().getName().equals(Main.getInstance().getInventoryHandler().getShopname())) {
+        if(e.getInventory().getName().equals(Lobby.getInstance().getInventoryHandler().getShopname())) {
             if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
 
                 p.playSound(p.getLocation(), Sound.CLICK, 12.0F, 12.0F);
