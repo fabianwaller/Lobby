@@ -1,6 +1,6 @@
 package de.rewex.lobby.listeners.chests;
 
-import de.rewex.lobby.Main;
+import de.rewex.lobby.Lobby;
 import de.rewex.lobby.manager.RewardHandler;
 import de.rewex.mysql.players.rewards.RewardManager;
 import org.bukkit.Location;
@@ -54,7 +54,7 @@ public class DailyChests implements Listener {
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 3.0F, 2.0F);
                         rewardHandler.updateReward(p);
                     } else {
-                        p.sendMessage(Main.coinspr + "§7Tägliche Belohnung verfügbar in " + RewardManager.getRemainingTime(p.getUniqueId().toString()));
+                        p.sendMessage(Lobby.coinspr + "§7Tägliche Belohnung verfügbar in " + RewardManager.getRemainingTime(p.getUniqueId().toString()));
                         p.playSound(p.getLocation(), Sound.CLICK, 3.0F, 2.0F);
                         p.closeInventory();
                     }

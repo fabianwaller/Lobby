@@ -1,21 +1,15 @@
 package de.rewex.lobby.manager;
 
-import de.rewex.lobby.Main;
+import de.rewex.lobby.Lobby;
 import de.rewex.lobby.manager.utils.ItemBuilder;
-import de.rewex.mysql.players.rewards.RewardManager;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
-
-import java.util.ArrayList;
 
 public class InventoryHandler {
 
@@ -49,16 +43,16 @@ public class InventoryHandler {
         this.shop.setItem(22, new ItemBuilder(Material.BARRIER).setName("§7Soon").build());
 
         this.lobby = Bukkit.createInventory(null, 9, lobbyname);
-        Main.getInstance().getCloudServer().getLobbys().forEach(item -> {
+        /*Lobby.getInstance().getCloudServer().getLobbys().forEach(item -> {
             lobby.addItem();
-        });
+        });*/
 
     }
 
     public void updateLobbyInventory(){
         this.lobby = Bukkit.createInventory(null, 9, "§2•§a● Lobby Wechsler");
 
-        Main.getInstance().getCloudServer().getLobbys().forEach(item -> {
+        Lobby.getInstance().getCloudServer().getLobbys().forEach(item -> {
             lobby.addItem(item);
         });
 

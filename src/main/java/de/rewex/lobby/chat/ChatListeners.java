@@ -1,14 +1,10 @@
 package de.rewex.lobby.chat;
 
-import de.dytanic.cloudnet.ext.cloudperms.CloudPermissionsHelper;
-import de.dytanic.cloudnet.ext.cloudperms.CloudPermissionsManagement;
-import de.dytanic.cloudnet.ext.cloudperms.node.CloudNetCloudPermissionsModule;
-import de.rewex.lobby.Main;
+import de.rewex.lobby.Lobby;
 import de.rewex.lobby.manager.LocationManager;
 import de.rewex.lobby.manager.RangManager;
 import de.rewex.lobby.manager.utils.TitleAPI;
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,7 +27,7 @@ public class ChatListeners implements Listener {
             String msg = e.getMessage();
 
             if(!p.hasPermission("lobby.chat") && !p.hasPermission("team")) {
-                p.sendMessage(Main.prefix + "Du benötigst mindestens den §6Prime §7Rang um schreiben zu können§8.");
+                p.sendMessage(Lobby.prefix + "Du benötigst mindestens den §6Prime §7Rang um schreiben zu können§8.");
                 e.setMessage("");
                 e.setCancelled(true);
             } else {
@@ -40,7 +36,7 @@ public class ChatListeners implements Listener {
                 });
                 Bukkit.getConsoleSender().sendMessage(RangManager.getRang(p) + " §8x " + p.getName() + " §8-> " + msg);
                 this.spam.add(p.getName());
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Lobby.getInstance(), new Runnable() {
                     public void run() {
                         spam.remove(p.getName());
                     }
@@ -63,9 +59,9 @@ public class ChatListeners implements Listener {
         String cmd = e.getMessage();
         if ((cmd.equalsIgnoreCase("/rl")) || (cmd.equalsIgnoreCase("/reload"))) {
             if (p.hasPermission("server.reload")) {
-                Bukkit.broadcastMessage(Main.prefix + "Der Server führt einen Reload durch");
+                Bukkit.broadcastMessage(Lobby.prefix + "Der Server führt einen Reload durch");
                 Bukkit.reload();
-                Bukkit.broadcastMessage(Main.prefix + "Reload erfolgreich durchgeführt");
+                Bukkit.broadcastMessage(Lobby.prefix + "Reload erfolgreich durchgeführt");
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     LocationManager.telLocation(players, "spawn", false);
                 }
@@ -73,7 +69,7 @@ public class ChatListeners implements Listener {
 
             } else {
 
-                p.sendMessage(Main.noperm);
+                p.sendMessage(Lobby.noperm);
                 e.setCancelled(true);
             }
         }
@@ -86,7 +82,7 @@ public class ChatListeners implements Listener {
             String msg = e.getMessage().split(" ")[0];
             HelpTopic help = Bukkit.getServer().getHelpMap().getHelpTopic(msg);
             if (help == null) {
-                p.sendMessage(Main.prefix + "Den Befehl §7[§c" + msg + "§7] §7gibt es nicht§8!");
+                p.sendMessage(Lobby.prefix + "Den Befehl §7[§c" + msg + "§7] §7gibt es nicht§8!");
                 e.setCancelled(true);
             }
         }

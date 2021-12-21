@@ -1,7 +1,7 @@
 package de.rewex.lobby.listeners.lobbywechsler;
 
 import de.dytanic.cloudnet.ext.bridge.BridgePlayerManager;
-import de.rewex.lobby.Main;
+import de.rewex.lobby.Lobby;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,9 +16,9 @@ public class LobbywechslerListeners implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         if ((e.getAction() == Action.RIGHT_CLICK_BLOCK) || (e.getAction() == Action.RIGHT_CLICK_AIR)) {
             if (e.getItem() != null) {
-                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Main.getInstance().getInventoryHandler().getLobbyname() + " §8| §7Rechtsklick")) {
-                    Main.getInstance().getInventoryHandler().updateLobbyInventory();
-                    e.getPlayer().openInventory(Main.getInstance().getInventoryHandler().getLobbyInventory());
+                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Lobby.getInstance().getInventoryHandler().getLobbyname() + " §8| §7Rechtsklick")) {
+                    Lobby.getInstance().getInventoryHandler().updateLobbyInventory();
+                    e.getPlayer().openInventory(Lobby.getInstance().getInventoryHandler().getLobbyInventory());
                     e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CLICK, 12.0F, 12.0F);
                     e.setCancelled(true);
                 }
@@ -33,7 +33,7 @@ public class LobbywechslerListeners implements Listener {
             p = (Player) e.getWhoClicked();
         }
 
-        if(e.getInventory().getName().equals(Main.getInstance().getInventoryHandler().getLobbyname())) {
+        if(e.getInventory().getName().equals(Lobby.getInstance().getInventoryHandler().getLobbyname())) {
             if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
                 BridgePlayerManager.getInstance().proxySendPlayer(p.getUniqueId(),
                         e.getCurrentItem().getItemMeta().getDisplayName());

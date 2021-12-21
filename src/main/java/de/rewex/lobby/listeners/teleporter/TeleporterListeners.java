@@ -1,7 +1,6 @@
 package de.rewex.lobby.listeners.teleporter;
 
-import de.rewex.lobby.Main;
-import de.rewex.lobby.manager.InventoryHandler;
+import de.rewex.lobby.Lobby;
 import de.rewex.lobby.manager.LocationManager;
 import de.rewex.mysql.players.settings.LobbySettings;
 import org.bukkit.Sound;
@@ -21,8 +20,8 @@ public class TeleporterListeners implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         if ((e.getAction() == Action.RIGHT_CLICK_BLOCK) || (e.getAction() == Action.RIGHT_CLICK_AIR)) {
             if (e.getItem() != null) {
-                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Main.getInstance().getInventoryHandler().getTeleportername() + " §8| §7Rechtsklick")) {
-                    e.getPlayer().openInventory(Main.getInstance().getInventoryHandler().getTeleporterInventory());
+                if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Lobby.getInstance().getInventoryHandler().getTeleportername() + " §8| §7Rechtsklick")) {
+                    e.getPlayer().openInventory(Lobby.getInstance().getInventoryHandler().getTeleporterInventory());
                     e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.CLICK, 12.0F, 12.0F);
                     if(LobbySettings.getAnimationen(e.getPlayer().getUniqueId().toString()) == true) {
                         //e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED,Integer.MAX_VALUE,2));
@@ -36,7 +35,7 @@ public class TeleporterListeners implements Listener {
 
     @EventHandler
     public void onClose(InventoryCloseEvent e) {
-        if(e.getInventory().getName().equalsIgnoreCase(Main.getInstance().getInventoryHandler().getTeleportername())) {
+        if(e.getInventory().getName().equalsIgnoreCase(Lobby.getInstance().getInventoryHandler().getTeleportername())) {
             for(PotionEffect effect : e.getPlayer().getActivePotionEffects()) {
                 e.getPlayer().removePotionEffect(effect.getType());
             }
@@ -50,7 +49,7 @@ public class TeleporterListeners implements Listener {
             p = (Player) e.getWhoClicked();
         }
 
-        if(e.getInventory().getName().equals(Main.getInstance().getInventoryHandler().getTeleportername())) {
+        if(e.getInventory().getName().equals(Lobby.getInstance().getInventoryHandler().getTeleportername())) {
             if ((e.getCurrentItem() != null) && (e.getCurrentItem().hasItemMeta())) {
 
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§aSpawn")) {

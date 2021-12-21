@@ -1,6 +1,5 @@
 package de.rewex.lobby.listeners;
 
-import de.rewex.lobby.Main;
 import de.rewex.lobby.commands.BuildCmd;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

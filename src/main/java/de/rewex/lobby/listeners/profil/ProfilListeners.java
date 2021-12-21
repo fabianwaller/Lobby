@@ -1,10 +1,7 @@
 package de.rewex.lobby.listeners.profil;
 
-import de.rewex.lobby.Main;
-import de.rewex.lobby.listeners.ConnectListeners;
 import de.rewex.lobby.manager.*;
 import de.rewex.mysql.players.settings.LobbySettings;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,9 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.Inventory;
-
-import java.util.HashMap;
 
 public class ProfilListeners implements Listener {
 

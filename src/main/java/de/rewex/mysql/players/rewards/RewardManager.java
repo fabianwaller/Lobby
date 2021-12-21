@@ -1,13 +1,8 @@
 package de.rewex.mysql.players.rewards;
 
-import de.rewex.lobby.Main;
+import de.rewex.lobby.Lobby;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Timer;
-import java.util.UUID;
 
 import de.rewex.mysql.MySQL;
 import de.rewex.mysql.players.stats.PlayersAPI;
@@ -120,7 +115,7 @@ public class RewardManager {
         setTime(p.getUniqueId().toString(), Long.valueOf(toSet));
 
         PlayersAPI.addCoins(p.getUniqueId().toString(), Integer.valueOf(30));
-        p.sendMessage(Main.coinspr + "§7Tägliche Belohnung erhalten: §a+ §b30 Coins");
+        p.sendMessage(Lobby.coinspr + "§7Tägliche Belohnung erhalten: §a+ §b30 Coins");
     }
 
     public static long getTime(String uuid) {

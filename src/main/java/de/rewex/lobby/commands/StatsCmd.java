@@ -1,6 +1,6 @@
 package de.rewex.lobby.commands;
 
-import de.rewex.lobby.Main;
+import de.rewex.lobby.Lobby;
 import de.rewex.lobby.manager.ProfilHandler;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -10,16 +10,16 @@ import org.bukkit.entity.Player;
 
 public class StatsCmd implements CommandExecutor  {
 
-    private final Main plugin;
+    private final Lobby plugin;
 
-    public StatsCmd(Main main) {
+    public StatsCmd(Lobby main) {
         this.plugin = main;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(!(sender instanceof Player)) {
-            sender.sendMessage(Main.noplayer);
+            sender.sendMessage(Lobby.noplayer);
             return true;
         }
 

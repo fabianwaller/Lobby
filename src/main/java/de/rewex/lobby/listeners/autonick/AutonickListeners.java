@@ -1,12 +1,9 @@
 package de.rewex.lobby.listeners.autonick;
 
-import de.rewex.lobby.Main;
 import org.bukkit.Sound;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class AutonickListeners implements Listener {

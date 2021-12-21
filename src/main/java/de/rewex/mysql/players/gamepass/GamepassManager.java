@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import de.rewex.mysql.MySQL;
 import org.bukkit.Bukkit;
-import de.rewex.lobby.Main;
+import de.rewex.lobby.Lobby;
 
 public class GamepassManager {
 
@@ -19,7 +19,7 @@ public class GamepassManager {
         }
         MySQL.update("UPDATE PLAYERS SET GAMEPASS='" + end + "' WHERE UUID='" + uuid + "'");
         if(Bukkit.getServer().getPlayer(uuid) != null) {
-            Bukkit.getServer().getPlayer(uuid).sendMessage(Main.passpr + "§7Dein §6Gamepass §7wurde erfolgreich §aaktiviert");
+            Bukkit.getServer().getPlayer(uuid).sendMessage(Lobby.passpr + "§7Dein §6Gamepass §7wurde erfolgreich §aaktiviert");
         }
     }
 
